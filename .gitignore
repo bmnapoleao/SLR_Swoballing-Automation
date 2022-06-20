@@ -12,7 +12,7 @@ constants.py
 # Others
 help.txt
 *.exe
-
+*.csv
 
 # Distribution / packaging
 .Python
