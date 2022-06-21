@@ -1,5 +1,6 @@
 import os
 import time
+import re
 import csv
 import pandas as pd
 import requests
@@ -53,14 +54,19 @@ def pdfextract(url):
         text = extract_text('metadata.pdf')
         tlow  = text.lower()
         index = tlow.rfind('references')
+        refs = []
         if (index != -1):
-            text1 = text[index:]
-            print(text1)
-        os.remove('metadata.pdf')
-
+            text1 = text[index+11:]
+            #strlist = re.split(r'\[0-9+\]',text1)
+            #strlist = re.split(r'\n\n',text1)
+            strlist = text1.split("\n\n")
+            ref = [i for i in strlist if i]
+            refs = ref
+        
     ###### ref list
-    #df = pd.DataFrame(refs)
-    #df.to_csv('pdf.csv',index=False, header=["References"])    
+        df = pd.DataFrame(refs)
+        df.to_csv('pdf.csv',index=False, header=["References"])
+        os.remove('metadata.pdf')
 
 
 
@@ -70,16 +76,15 @@ def springer(url):
     r = sess.get(url)
 
     r.html.render()
-    refer = r.html.xpath('//*[@id="Bib1-content"]/div',first=True)
-    print(refer.text)
+    refer = r.html.find('.c-article-references__text')
+    refs = []
 
-    #for num, i in enumerate(res_data):
-    #    d = i.text
-    #    refs.append(d)
+    for num, i in enumerate(refer):
+        d = i.text
+        refs.append(d)
         
-    ####### ref list
-    #df = pd.DataFrame(refs)
-    #df.to_csv('springer.csv',index=False, header=["References"])   
+    df = pd.DataFrame(refs)
+    df.to_csv('springer.csv',index=False, header=["References"])   
 
 
 
@@ -106,9 +111,9 @@ if __name__ == "__main__":
     url = input("Enter url: ")
     if (url.find('ieee')!=-1):
         ieee(url)
-    elif (url.find('.pdf')!=-1): # need to export the refs
+    elif (url.find('.pdf')!=-1): # not satisfactory
         pdfextract(url)
-    elif (url.find('springer')!=-1): # need to export the refs
+    elif (url.find('springer')!=-1): 
         springer(url)
     elif (url.find('acm')!=-1):
         acm(url)
