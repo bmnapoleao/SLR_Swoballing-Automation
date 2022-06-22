@@ -30,11 +30,17 @@ url = 'https://arxiv.org/pdf/2007.07751.pdf'
 r = requests.get(url, stream = True)
 with open('metadata.pdf', 'wb') as f:
     f.write(r.content)
-
+'''
 
 if os.path.exists("2007.07751.pdf"):
     from pdfminer.high_level import extract_text, extract_pages
-    from pdfminer.layout import LTTextBoxHorizontal
+    import fitz
+    with fitz.open('2007.07751.pdf') as doc:
+        text = ""
+        for page in doc:
+            text += page.get_text()
+    print(text)
+    '''
     text = extract_text('2007.07751.pdf')
     tlow  = text.lower()
     index = tlow.rfind('references')
@@ -42,7 +48,7 @@ if os.path.exists("2007.07751.pdf"):
         text1 = text[index:]
         print(text1)
     #os.remove('metadata.pdf')
-'''
+
 
 
 ## IEEE - doesn't work. Need to use Selenium
@@ -53,5 +59,5 @@ r = sess.get(url)
 r.html.render(timeout=20)
 refer = r.html.xpath('//*[@id="references-section-container"]/div[2]',first=True)
 print(refer)
-
+'''
 

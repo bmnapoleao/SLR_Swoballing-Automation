@@ -1,270 +1,67 @@
 References
-"
-[1] B. Kitchenham, D. Budgen, P. Brereton, Evidence-Based Software En-
-gineering and Systematic Reviews, Chapman & Hall/CRC Innovations
-in Software Engineering and Software Development Series, Chapman &
-Hall/CRC, 2015."
-"[2] T. Dyb˚a, B. A. Kitchenham, M. Jørgensen, Evidence-based software"
-"engineering for practitioners, IEEE Software 22 (2005) 58–65."
-"[3] F. da Silva, A. Santos, S. Soares, A. Fran¸ca, C. Monteiro, Six years
-of systematic literature reviews in software engineering: an extended
-in: 32nd International Conference on Software (ICSE’
-tertiary study,
-10), 2010, pp. 1–10."
-"[4] H. Zhang, M. Babar, An empirical investigation of systematic reviews
-in software engineering, in: 5th International Symposium on Empirical
-Software Engineering and Measurement (ESEM’ 11), 2011, pp. 1–10."
-"[5] P. Daigneault, S. Jacob, M. Ouimet, Using systematic review methods
-within a ph.d. dissertation in political science: challenges and lessons
-learned from practice, International Journal of Social Research Method-
-ology 17 (2014) 267–283."
-"[6] L. Puljak, D. Sapunar, Acceptance of a systematic review as a thesis:
-survey of biomedical doctoral programs in europe, Systematic Reviews
-6 (2017)."
-"[7] M. Riaz, M. Sulayman, N. Salleh, E. Mendes, Experiences conducting
-systematic reviews from novices’ perspective, in: 14th International Con-
-ference on Evaluation and Assessment in Software Engineering (EASE’
-10), 2010, pp. 44–53."
-"[8] M. Lavall´ee, P.-N. Robillard, R. Mirsalari, Performing systematic liter-
-ature reviews with novices: An iterative approach, IEEE Transactions
-on Education 57 (2014) 175–181."
-36
-"[9] M. Kuhrmann, Teaching empirical software engineering using expert
-teams, in: 2017 Software Engineering Education in Universities (SEUH’
-17), 2017, pp. 20–31."
-"[10] B. Kitchenham, P. Brereton, A systematic review of systematic re-
-view process research in software engineering, Information and Software
-Technology 55 (2013) 2049–2075."
-"[11] S. Imtiaz, M. Bano, N. Ikram, M. Niazi, A tertiary study: Experiences
-of conducting systematic literature reviews in software engineering, in:
-17th International Conference on Evaluation and Assessment in Software
-Engineering (EASE’ 13), 2013, pp. 177–182."
-"[12] B. Kitchenham, D. Budgen, O. Brereton, Using mapping studies as the
-basis for further research - a participant-observer case study, Information
-and Software Technology 53 (2011) 638–651."
-"[13] D. Maplesden, E. Tempero, J. Hosking, J. Grundy, Performance analysis
-for object-oriented software: A systematic mapping, IEEE Transaction
-on Software Engineering 41 (2015) 691–710."
-"[14] H. Zhang, B. Muhammad, T. Paolo,"
-"Identifying relevant studies in
-software engineering, Information and Software Technology 53 (2011)
-625–637."
-"[15] B. A. Kitchenham, T. Dyb˚a, M. Jørgensen, Evidence-based software
-engineering, in: 26th International Conference on Software Engineering,
-(ICSE’ 04, 2004, pp. 273–284."
-"[16] M. Jørgensen, T. Dyb˚a, B. A. Kitchenham, Teaching evidence-based
-software engineering to university students, in: 11st IEEE International
-Software Metrics Symposium (METRICS’ 05), IEEE Computer Society,
-2005, pp. 24–34."
-"[17] A. Rainer, T. Hall, N. Baddoo, A preliminary empirical investigation
-of the use of evidence based software engineering by under-graduate
-in: 10th International Conference on Evaluation and Assess-
-students,
-ment in Software Engineering (EASE’ 06), BCS Learning & Develop-
-ment Ltd., 2006, pp. 91–100."
-37
-"[18] W. C., Empirical software engineering: Teaching methods and con-
-ducting studies,
-in: Empirical Software Engineering Issues. Critical
-Assessment and Future Directions. Lecture Notes in Computer Science,
-volume 4336, Springer, 2007, pp. 135–142."
-"[19] M. T. Baldassarre, N. Boﬀoli, D. Caivano, G. Visaggio, A hands-on
-in: 9th International Confer-
-approach for teaching systematic review,
-ence on Product-Focused Software Process Improvement (PROFES’ 08),
-Springer-Verlag, 2008, pp. 415–426."
-"[20] A. Rainer, S. Beecham, A follow-up empirical evaluation of evidence
-based software engineering by undergraduate students, in: 12th Interna-
-tional Conference on Evaluation and Assessment in Software Engineer-
-ing (EASE’ 14), 2008, pp. 78–87."
-"[21] P. O. Brereton, M. Turner, R. Kaur, Pair programming as a teaching
-in: 22nd Conference on
-tool: a student review of empirical studies,
-Software Engineering Education and Training (CSEE&T’ 09), 2009, pp.
-240–247."
-"[22] D. S. Janzen, J. Ryoo, Engaging the net generation with evidence-
-based software engineering through a community-driven web database,
-Journal of Systems and Software 82 (2009) 563–570."
-"[23] B. J. Oates, G. Capper, Using systematic reviews and evidence-based
-in: 9th International Con-
-software engineering with masters students,
-ference on Evaluation and Assessment in Software Engineering (EASE’
-09), 2009, pp. 1–8."
-"[24] M. A. Babar, H. Zhang, Systematic literature reviews in software en-
-gineering: Preliminary results from interviews with researchers, in: 3rd
-International Symposium on Empirical Software Engineering and Mea-
-surement (ESEM’ 09), 2009, pp. 346–355."
-"[25] S. MacDonell, M. Shepperd, B. Kitchenham, E. Mendes, How reliable
-are systematic reviews in empirical software engineering?, IEEE Trans-
-actions on Software Engineering 36 (2010) 676–687."
-"[26] B. Kitchenham, P. Brereton, D. Budgen, The educational value of map-
-in: 32nd International"
-"ping studies of software engineering literature,"
-38
-"Conference on Software Engineering (ICSE’ 10), volume 1, 2010, pp.
-589–598."
-"[27] B. A. Kitchenham, P. Brereton, Z. Li, D. Budgen, A. Burn, Repeata-
-in: 15th Annual Conference on
-bility of systematic literature reviews,
-Evaluation & Assessment in Software Engineering (EASE’ 11), 2011,
-pp. 46–55."
-"[28] P. Brereton, A study of computing undergraduates undertaking a sys-
-tematic literature review, IEEE Transactions on Education 54 (2011)
-558–563."
-"[29] J. Carver, E. Hassler, E. Hernandes, N. Kraft, Identifying barriers to the
-in: 7th International Symposium
-systematic literature review process,
-on Empirical Software Engineering and Measurement (ESEM’ 13), 2013,
-pp. 203–212."
-"[30] D. Castelluccia, G. Visaggio, Teaching evidence-based software engineer-
-ing: Learning by a collaborative mapping study of open source software,
-SIGSOFT Software Engineering Notes 38 (2013) 1–4."
-"[31] C. Catal, Teaching evidence-based software engineering to master stu-
-dents: A single lecture within a course or an entire semester-long
-course?, SIGSOFT Software Engineering Notes 38 (2013) 1–2."
-"[32] C. Wohlin, P. Runeson, P. Silveira Neto, E. Engstrom, I. Machado,
-E. de Almeida, On the reliability of mapping studies in software engi-
-neering, Journal of Systems and Software 86 (2013) 2594– 2610."
-"[33] S. Dekhane, R. Price, Course-embedded research in software develop-
-ment courses, in: 45th ACM Technical Symposium on Computer Science
-Education (SIGCSE’ 14), ACM, 2014, pp. 45–48."
-"[34] T. Clear, Follow the moon’ development: Writing a systematic literature
-in: 15th Koli Calling
-review on global software engineering education,
-Conference on Computing Education Research, Koli Calling ’15, ACM,
-2015, pp. 1–4."
-"[35] B. Pejcinovic, Using systematic literature reviews to enhance student
-learning, in: Annual Conference and Exposition (ASEE’ 15), 2015, pp.
-1–13."
-39
-"[36] E. F. Souza, R. Falbo, N. Vijaykumar, Using the ﬁndings of a mapping
-study to conduct a research project: a case in knowledge management in
-software testing, in: 41st Euromicro Conference on Software Engineering
-and Advanced Applications (SEAA’ 15), 2015, pp. 208–215."
-"[37] A.-J. Kaijanaho, Teaching master’s degree students to read research
-literature: Experience in a programming languages course 2002–2017,
-in: 17th Koli Calling International Conference on Computing Education
-Research (Koli Calling ’17), ACM, New York, NY, USA, 2017, pp. 143–
-147."
-"[38] J. S. Moll´eri, N. bin Ali, K. Petersen, N. M. Minhas, P. Chatzipetrou,
-Teaching students critical appraisal of scientiﬁc literature using check-
-in: 3rd European Conference of Software Engineering Education
-lists,
-(ECSEE’ 18), ACM, 2018, pp. 8–17."
-"[39] T. V. Ribeiro, J. Massollar, G. H. Travassos, Challenges and pitfalls on
-surveying evidence in the software engineering technical literature: An
-exploratory study with novices, Empirical Software Engine 23 (2018)
-1594–1663."
-"[40] M. Kuhrmann, A practical approach to align research with master’s level
-courses, in: 15th International Conference on Computational Science and
-Engineering (CSE’ 12), IEEE Computer Society, 2012, pp. 202–208."
-"[41] B. Kitchenham, S. Pﬂeeger, Personal opinion surveys,"
-"in: Guide to
-Advanced Empirical Software Engineering, Springer London, 2008, pp.
-63–92."
-"[42] B. Kitchenham, O. Brereton, S. Owen, J. Butcher, C. Jeﬀeries, Length
-and readability of structured software engineering abstracts, IET Soft-
-ware 2 (2008) 37–45."
-"[43] V. Garousi, M. M¨antyl¨a, A systematic literature review of literature
-Information and Software Technology 80"
-"reviews in software testing,
-(2016) 195–216."
-"[44] B. Kitchenham, P. Brereton, D. Budgen, M. Turner, J. Bailey,
-S. Linkman, Systematic literature reviews in software engineering –
-a systematic literature review, Information and Software Technology 51
-(2009) 7–15."
-40
-"[45] B. Kitchenham, R. Pretorius, D. Budgen, P. Brereton, M. Turner, M. Ni-
-azi, S. Linkman, Systematic literature reviews in software engineering –
-a tertiary study, Information and Software Technology 52 (2010) 792–
-805."
-"[46] F. da Silva, A. Santos, S. Soares, A. Fran¸ca, C. F. Monteiro, A critical
-appraisal of systematic reviews in software engineering from the per-
-spective of the research questions asked in the reviews, in: 3rd Interna-
-tional Symposium on Empirical Software Engineering and Measurement
-(ESEM’ 10), ACM, 2010, pp. 33:1–33:4."
-"[47] D. Cruzes, T. Dyb˚a, Research synthesis in software engineering: A
-Information and Sofyware Technology 53 (2011) 440–"
-"tertiary study,
-455."
-"[48] G. K. Hanssen, D. Smite, N. B. Moe, Signs of agile trends in global soft-
-ware engineering research: A tertiary study, in: 6th International Con-
-ference on Global Software Engineering Workshop (ICGSE’ 11), 2011,
-pp. 17–23."
-"[49] A. Marques, R. Rodrigues, T. Conte, Systematic literature reviews in
-in: 17th Interna-
-distributed software development: A tertiary study,
-tional Conference on Global Software Engineering (ICGSE’ 12), 2012,
-pp. 134–143."
-"[50] J. Verner, O. Brereton, B. Kitchenham, M. Turner, M. Niazi, Risks
-and risk mitigation in global software development: A tertiary study,
-Information and Software Technology 56 (2014) 54–78."
-"[51] J. M. Verner, O. P. Brereton, B. A. Kitchenham, M. Turner, M. Niazi,
-Systematic literature reviews in global software development: A tertiary
-in: 16th International Conference on Evaluation Assessment in
-study,
-Software Engineering (EASE’ 12), 2012, pp. 2–11."
-"[52] M. Bano, D. Zowghi, N. Ikram, Systematic reviews in requirements en-
-gineering: A tertiary study, in: 4th International Workshop on Empirical
-Requirements Engineering (EmpiRE’ 14), 2014, pp. 9–16."
-"[53] Y. Zhou, H. Zhang, X. Huang, S. Yang, M. A. Babar, H. Tang, Quality
-assessment of systematic reviews in software engineering: A tertiary"
-41
-"study, in: 19th International Conference on Evaluation and Assessment
-in Software Engineering (EASE’ 15), ACM, 2015, pp. 14:1–14:14."
-"[54] X. Zhou, Y. Jin, H. Zhang, S. Li, X. Huang, A map of threats to
-validity of systematic literature reviews in software engineering, in: 23rd
-Asia-Paciﬁc Software Engineering Conference (APSEC’ 16), 2016, pp.
-153–160."
-"[55] B. Napole˜ao, K. R. Felizardo, E. F. de Souza, N. L. Vijaykumar, Practi-
-cal similarities and diﬀerences between systematic literature reviews and
-in: 39th International Confer-
-systematic mappings: a tertiary study,
-ence on Software Engineering and Knowledge Engineering (SEKE’ 17),
-2017, pp. 85–90."
-"[56] C. Marimuthu, K. Chandrasekaran, Systematic studies in software prod-
-uct lines: A tertiary study, in: 21st International Systems and Software
-Product Line Conference – Volume A (SPLC’ 17), ACM, 2017, pp. 143–
-152."
-"[57] D. Budgen, P. O. Brereton, S. Drummond, N. Williams, Reporting
-Information"
-"systematic reviews: Some lessons from a tertiary study,
-and Software Technology (IST) 95 (2018) 62–74."
-"[58] P. Singh, M. Galster, K. Singh, How do secondary studies in software
-in: 22nd International Con-
-engineering report automated searches?,
-ference on Evaluation and Assessment in Software Engineering (EASE’
-18), 2018, pp. 145–150."
-"[59] N. Rios, M. G. M. Neto, R. O. Sp´ınola, A tertiary study on technical
-debt: Types, management strategies, research trends, and base informa-
-tion for practitioners, Information and Software Technology 102 (2018)
-117–145."
-"[60] A. Ampatzoglou, S. Bibi, P. Avgeriou, M. Verbeek, Identifying, cate-
-gorizing and mitigating threats to validity in software engineering sec-
-ondary studies, Information and Software Technology Article in press
-(2018)."
-"[61] L. Villalobos-Arias, C. Quesada-L´opez, A. Martinez, M. Jenkins, A
-tertiary study on model-based testing areas, tools and challenges: Pre-"
-42
-"liminary results, in: 21st Ibero-American Conference on Software Engi-
-neering (CIbSE’ 18), 2018, pp. 15–28."
-"[62] M. M. Mariano, E. F. de Souza, A. Endo, N. L. Vijaykumar, A compar-
-ative study of algorithms for generating switch cover test sets, in: 15th
-Brazilian Symposium of Software Quality (SBQS’ 15), 2015, pp. 6–20."
-"[63] B. Kitchenham, S. Charters, Guidelines for performing Systematic Lit-
-erature Reviews in Software Engineering, Technical Report EBSE 2007-
-001, Keele University and Durham University, UK, 2007."
-"[64] K. Petersen, R. Feldt, S. Mujtaba, M. Mattsson, Systematic mapping
-in: 12th International Conference on
-studies in software engineering,
-Evaluation and Assessment in Software Engineering (EASE’ 12), BCS-
-eWiC, 2008, pp. 1–10."
-"[65] K. Petersen, S. Vakkalanka, L. Kuzniarz, Guidelines for conducting
-systematic mapping studies in software engineering: an update, Infor-
-mation and Software Technology 64 (2015) 1–18."
-"[66] B. Amir, P. Ralph, There is no random sampling in software engineering
-in: 40th International Conference on Software Engineering:"
-"research,
-Companion Proceeedings (ICSE’ 18), 2018, pp. 344–345."
-43
-
+"[1] B. Kitchenham, D. Budgen, P. Brereton, Evidence-Based Software Engineering and Systematic Reviews, Chapman & Hall/CRC Innovations in Software Engineering and Software Development Series, Chapman & Hall/CRC, 2015."
+"[2] T. Dyb˚a, B. A. Kitchenham, M. Jørgensen, Evidence-based software engineering for practitioners, IEEE Software 22 (2005) 58–65."
+"[3] F. da Silva, A. Santos, S. Soares, A. Fran¸ca, C. Monteiro, Six years of systematic literature reviews in software engineering: an extended tertiary study, in: 32nd International Conference on Software (ICSE’ 10), 2010, pp. 1–10."
+"[4] H. Zhang, M. Babar, An empirical investigation of systematic reviews in software engineering, in: 5th International Symposium on Empirical Software Engineering and Measurement (ESEM’ 11), 2011, pp. 1–10."
+"[5] P. Daigneault, S. Jacob, M. Ouimet, Using systematic review methods within a ph.d. dissertation in political science: challenges and lessons learned from practice, International Journal of Social Research Methodology 17 (2014) 267–283."
+"[6] L. Puljak, D. Sapunar, Acceptance of a systematic review as a thesis: survey of biomedical doctoral programs in europe, Systematic Reviews 6 (2017)."
+"[7] M. Riaz, M. Sulayman, N. Salleh, E. Mendes, Experiences conducting systematic reviews from novices’ perspective, in: 14th International Conference on Evaluation and Assessment in Software Engineering (EASE’ 10), 2010, pp. 44–53."
+"[8] M. Lavall´ee, P.-N. Robillard, R. Mirsalari, Performing systematic literature reviews with novices: An iterative approach, IEEE Transactions on Education 57 (2014) 175–181."
+"[9] M. Kuhrmann, Teaching empirical software engineering using expert teams, in: 2017 Software Engineering Education in Universities (SEUH’ 17), 2017, pp. 20–31."
+"[10] B. Kitchenham, P. Brereton, A systematic review of systematic review process research in software engineering, Information and Software Technology 55 (2013) 2049–2075."
+"[11] S. Imtiaz, M. Bano, N. Ikram, M. Niazi, A tertiary study: Experiences of conducting systematic literature reviews in software engineering, in: 17th International Conference on Evaluation and Assessment in Software Engineering (EASE’ 13), 2013, pp. 177–182."
+"[12] B. Kitchenham, D. Budgen, O. Brereton, Using mapping studies as the basis for further research - a participant-observer case study, Information and Software Technology 53 (2011) 638–651."
+"[13] D. Maplesden, E. Tempero, J. Hosking, J. Grundy, Performance analysis for object-oriented software: A systematic mapping, IEEE Transaction on Software Engineering 41 (2015) 691–710."
+"[14] H. Zhang, B. Muhammad, T. Paolo, Identifying relevant studies in software engineering, Information and Software Technology 53 (2011) 625–637."
+"[15] B. A. Kitchenham, T. Dyb˚a, M. Jørgensen, Evidence-based software engineering, in: 26th International Conference on Software Engineering, (ICSE’ 04, 2004, pp. 273–284."
+"[16] M. Jørgensen, T. Dyb˚a, B. A. Kitchenham, Teaching evidence-based software engineering to university students, in: 11st IEEE International Software Metrics Symposium (METRICS’ 05), IEEE Computer Society, 2005, pp. 24–34."
+"[17] A. Rainer, T. Hall, N. Baddoo, A preliminary empirical investigation of the use of evidence based software engineering by under-graduate students, in: 10th International Conference on Evaluation and Assessment in Software Engineering (EASE’ 06), BCS Learning & Development Ltd., 2006, pp. 91–100."
+"[18] W. C., Empirical software engineering: Teaching methods and conducting studies, in: Empirical Software Engineering Issues. Critical Assessment and Future Directions. Lecture Notes in Computer Science, volume 4336, Springer, 2007, pp. 135–142."
+"[19] M. T. Baldassarre, N. Boﬀoli, D. Caivano, G. Visaggio, A hands-on approach for teaching systematic review, in: 9th International Conference on Product-Focused Software Process Improvement (PROFES’ 08), Springer-Verlag, 2008, pp. 415–426."
+"[20] A. Rainer, S. Beecham, A follow-up empirical evaluation of evidence based software engineering by undergraduate students, in: 12th International Conference on Evaluation and Assessment in Software Engineering (EASE’ 14), 2008, pp. 78–87."
+"[21] P. O. Brereton, M. Turner, R. Kaur, Pair programming as a teaching tool: a student review of empirical studies, in: 22nd Conference on Software Engineering Education and Training (CSEE&T’ 09), 2009, pp. 240–247."
+"[22] D. S. Janzen, J. Ryoo, Engaging the net generation with evidencebased software engineering through a community-driven web database, Journal of Systems and Software 82 (2009) 563–570."
+"[23] B. J. Oates, G. Capper, Using systematic reviews and evidence-based software engineering with masters students, in: 9th International Conference on Evaluation and Assessment in Software Engineering (EASE’ 09), 2009, pp. 1–8."
+"[24] M. A. Babar, H. Zhang, Systematic literature reviews in software engineering: Preliminary results from interviews with researchers, in: 3rd International Symposium on Empirical Software Engineering and Measurement (ESEM’ 09), 2009, pp. 346–355."
+"[25] S. MacDonell, M. Shepperd, B. Kitchenham, E. Mendes, How reliable are systematic reviews in empirical software engineering?, IEEE Transactions on Software Engineering 36 (2010) 676–687."
+"[26] B. Kitchenham, P. Brereton, D. Budgen, The educational value of mapping studies of software engineering literature, in: 32nd International 38 Conference on Software Engineering (ICSE’ 10), volume 1, 2010, pp. 589–598."
+"[27] B. A. Kitchenham, P. Brereton, Z. Li, D. Budgen, A. Burn, Repeatability of systematic literature reviews, in: 15th Annual Conference on Evaluation & Assessment in Software Engineering (EASE’ 11), 2011, pp. 46–55."
+"[28] P. Brereton, A study of computing undergraduates undertaking a systematic literature review, IEEE Transactions on Education 54 (2011) 558–563."
+"[29] J. Carver, E. Hassler, E. Hernandes, N. Kraft, Identifying barriers to the systematic literature review process, in: 7th International Symposium on Empirical Software Engineering and Measurement (ESEM’ 13), 2013, pp. 203–212."
+"[30] D. Castelluccia, G. Visaggio, Teaching evidence-based software engineering: Learning by a collaborative mapping study of open source software, SIGSOFT Software Engineering Notes 38 (2013) 1–4."
+"[31] C. Catal, Teaching evidence-based software engineering to master students: A single lecture within a course or an entire semester-long course?, SIGSOFT Software Engineering Notes 38 (2013) 1–2."
+"[32] C. Wohlin, P. Runeson, P. Silveira Neto, E. Engstrom, I. Machado, E. de Almeida, On the reliability of mapping studies in software engineering, Journal of Systems and Software 86 (2013) 2594– 2610."
+"[33] S. Dekhane, R. Price, Course-embedded research in software development courses, in: 45th ACM Technical Symposium on Computer Science Education (SIGCSE’ 14), ACM, 2014, pp. 45–48."
+"[34] T. Clear, Follow the moon’ development: Writing a systematic literature review on global software engineering education, in: 15th Koli Calling Conference on Computing Education Research, Koli Calling ’15, ACM, 2015, pp. 1–4."
+"[35] B. Pejcinovic, Using systematic literature reviews to enhance student learning, in: Annual Conference and Exposition (ASEE’ 15), 2015, pp. 1–13."
+"[36] E. F. Souza, R. Falbo, N. Vijaykumar, Using the ﬁndings of a mapping study to conduct a research project: a case in knowledge management in software testing, in: 41st Euromicro Conference on Software Engineering and Advanced Applications (SEAA’ 15), 2015, pp. 208–215."
+"[37] A.-J. Kaijanaho, Teaching master’s degree students to read research literature: Experience in a programming languages course 2002–2017, in: 17th Koli Calling International Conference on Computing Education Research (Koli Calling ’17), ACM, New York, NY, USA, 2017, pp. 143– 147."
+"[38] J. S. Moll´eri, N. bin Ali, K. Petersen, N. M. Minhas, P. Chatzipetrou, Teaching students critical appraisal of scientiﬁc literature using checklists, in: 3rd European Conference of Software Engineering Education (ECSEE’ 18), ACM, 2018, pp. 8–17."
+"[39] T. V. Ribeiro, J. Massollar, G. H. Travassos, Challenges and pitfalls on surveying evidence in the software engineering technical literature: An exploratory study with novices, Empirical Software Engine 23 (2018) 1594–1663."
+"[40] M. Kuhrmann, A practical approach to align research with master’s level courses, in: 15th International Conference on Computational Science and Engineering (CSE’ 12), IEEE Computer Society, 2012, pp. 202–208."
+"[41] B. Kitchenham, S. Pﬂeeger, Personal opinion surveys, in: Guide to Advanced Empirical Software Engineering, Springer London, 2008, pp. 63–92."
+"[42] B. Kitchenham, O. Brereton, S. Owen, J. Butcher, C. Jeﬀeries, Length and readability of structured software engineering abstracts, IET Software 2 (2008) 37–45."
+"[43] V. Garousi, M. M¨antyl¨a, A systematic literature review of literature reviews in software testing, Information and Software Technology 80 (2016) 195–216."
+"[44] B. Kitchenham, P. Brereton, D. Budgen, M. Turner, J. Bailey, S. Linkman, Systematic literature reviews in software engineering – a systematic literature review, Information and Software Technology 51 (2009) 7–15."
+"[45] B. Kitchenham, R. Pretorius, D. Budgen, P. Brereton, M. Turner, M. Niazi, S. Linkman, Systematic literature reviews in software engineering – a tertiary study, Information and Software Technology 52 (2010) 792– 805."
+"[46] F. da Silva, A. Santos, S. Soares, A. Fran¸ca, C. F. Monteiro, A critical appraisal of systematic reviews in software engineering from the perspective of the research questions asked in the reviews, in: 3rd International Symposium on Empirical Software Engineering and Measurement (ESEM’ 10), ACM, 2010, pp. 33:1–33:4."
+"[47] D. Cruzes, T. Dyb˚a, Research synthesis in software engineering: A tertiary study, Information and Sofyware Technology 53 (2011) 440– 455."
+"[48] G. K. Hanssen, D. Smite, N. B. Moe, Signs of agile trends in global software engineering research: A tertiary study, in: 6th International Conference on Global Software Engineering Workshop (ICGSE’ 11), 2011, pp. 17–23."
+"[49] A. Marques, R. Rodrigues, T. Conte, Systematic literature reviews in distributed software development: A tertiary study, in: 17th International Conference on Global Software Engineering (ICGSE’ 12), 2012, pp. 134–143."
+"[50] J. Verner, O. Brereton, B. Kitchenham, M. Turner, M. Niazi, Risks and risk mitigation in global software development: A tertiary study, Information and Software Technology 56 (2014) 54–78."
+"[51] J. M. Verner, O. P. Brereton, B. A. Kitchenham, M. Turner, M. Niazi, Systematic literature reviews in global software development: A tertiary study, in: 16th International Conference on Evaluation Assessment in Software Engineering (EASE’ 12), 2012, pp. 2–11."
+"[52] M. Bano, D. Zowghi, N. Ikram, Systematic reviews in requirements engineering: A tertiary study, in: 4th International Workshop on Empirical Requirements Engineering (EmpiRE’ 14), 2014, pp. 9–16."
+"[53] Y. Zhou, H. Zhang, X. Huang, S. Yang, M. A. Babar, H. Tang, Quality assessment of systematic reviews in software engineering: A tertiary 41 study, in: 19th International Conference on Evaluation and Assessment in Software Engineering (EASE’ 15), ACM, 2015, pp. 14:1–14:14."
+"[54] X. Zhou, Y. Jin, H. Zhang, S. Li, X. Huang, A map of threats to validity of systematic literature reviews in software engineering, in: 23rd Asia-Paciﬁc Software Engineering Conference (APSEC’ 16), 2016, pp. 153–160."
+"[55] B. Napole˜ao, K. R. Felizardo, E. F. de Souza, N. L. Vijaykumar, Practical similarities and diﬀerences between systematic literature reviews and systematic mappings: a tertiary study, in: 39th International Conference on Software Engineering and Knowledge Engineering (SEKE’ 17), 2017, pp. 85–90."
+"[56] C. Marimuthu, K. Chandrasekaran, Systematic studies in software product lines: A tertiary study, in: 21st International Systems and Software Product Line Conference – Volume A (SPLC’ 17), ACM, 2017, pp. 143– 152."
+"[57] D. Budgen, P. O. Brereton, S. Drummond, N. Williams, Reporting systematic reviews: Some lessons from a tertiary study, Information and Software Technology (IST) 95 (2018) 62–74."
+"[58] P. Singh, M. Galster, K. Singh, How do secondary studies in software engineering report automated searches?, in: 22nd International Conference on Evaluation and Assessment in Software Engineering (EASE’ 18), 2018, pp. 145–150."
+"[59] N. Rios, M. G. M. Neto, R. O. Sp´ınola, A tertiary study on technical debt: Types, management strategies, research trends, and base information for practitioners, Information and Software Technology 102 (2018) 117–145."
+"[60] A. Ampatzoglou, S. Bibi, P. Avgeriou, M. Verbeek, Identifying, categorizing and mitigating threats to validity in software engineering secondary studies, Information and Software Technology Article in press (2018)."
+"[61] L. Villalobos-Arias, C. Quesada-L´opez, A. Martinez, M. Jenkins, A tertiary study on model-based testing areas, tools and challenges: Pre42 liminary results, in: 21st Ibero-American Conference on Software Engineering (CIbSE’ 18), 2018, pp. 15–28."
+"[62] M. M. Mariano, E. F. de Souza, A. Endo, N. L. Vijaykumar, A comparative study of algorithms for generating switch cover test sets, in: 15th Brazilian Symposium of Software Quality (SBQS’ 15), 2015, pp. 6–20."
+"[63] B. Kitchenham, S. Charters, Guidelines for performing Systematic Literature Reviews in Software Engineering, Technical Report EBSE 2007001, Keele University and Durham University, UK, 2007."
+"[64] K. Petersen, R. Feldt, S. Mujtaba, M. Mattsson, Systematic mapping studies in software engineering, in: 12th International Conference on Evaluation and Assessment in Software Engineering (EASE’ 12), BCSeWiC, 2008, pp. 1–10."
+"[65] K. Petersen, S. Vakkalanka, L. Kuzniarz, Guidelines for conducting systematic mapping studies in software engineering: an update, Information and Software Technology 64 (2015) 1–18."
+"[66] B. Amir, P. Ralph, There is no random sampling in software engineering research, in: 40th International Conference on Software Engineering: Companion Proceeedings (ICSE’ 18), 2018, pp. 344–345."

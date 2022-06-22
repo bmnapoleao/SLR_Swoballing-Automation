@@ -11,8 +11,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-from pdfminer.high_level import extract_text, extract_pages
-from pdfminer.layout import LTTextBoxHorizontal
+import fitz
 
 
 
@@ -49,24 +48,33 @@ def pdfextract(url):
     with open('metadata.pdf', 'wb') as f:
         f.write(r.content)
 
-
     if os.path.exists("metadata.pdf"):
-        text = extract_text('metadata.pdf')
+        text = ""
+        with fitz.open('2007.07751.pdf') as doc:
+            for page in doc:
+                text += page.get_text()
+        
         tlow  = text.lower()
         index = tlow.rfind('references')
+        
         refs = []
         if (index != -1):
             text1 = text[index+11:]
-            #strlist = re.split(r'\[0-9+\]',text1)
-            #strlist = re.split(r'\n\n',text1)
-            strlist = text1.split("\n\n")
-            ref = [i for i in strlist if i]
-            refs = ref
+            s1 = "\["
+            result = [_.start() for _ in re.finditer(s1, text1)]
+            strlist = [text1[i:j] for i,j in zip(result, result[1:]+[None])]
+            for j in strlist:
+                j = j.replace('-\n','')
+                j = j.split('\n')
+                j = " ".join(j)    
+                index1 = j.rfind(".")
+                refs.append(j[:index1+1])
+                #print(j[:index1+1])
         
-    ###### ref list
         df = pd.DataFrame(refs)
         df.to_csv('pdf.csv',index=False, header=["References"])
         os.remove('metadata.pdf')
+        
 
 
 
@@ -111,7 +119,7 @@ if __name__ == "__main__":
     url = input("Enter url: ")
     if (url.find('ieee')!=-1):
         ieee(url)
-    elif (url.find('.pdf')!=-1): # not satisfactory
+    elif (url.find('.pdf')!=-1): # better than before
         pdfextract(url)
     elif (url.find('springer')!=-1): 
         springer(url)
