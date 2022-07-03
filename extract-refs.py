@@ -50,7 +50,7 @@ def pdfextract(url):
 
     if os.path.exists("metadata.pdf"):
         text = ""
-        with fitz.open('2007.07751.pdf') as doc:
+        with fitz.open('metadata.pdf') as doc:
             for page in doc:
                 text += page.get_text()
         
