@@ -1,4 +1,7 @@
 import time
+import sys
+import urllib.request
+from urllib.error import HTTPError
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -10,16 +13,22 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 crossref = 'https://search.crossref.org/references'
+doi2bib = 'https://www.doi2bib.org/'
+BASE_URL = 'http://dx.doi.org/'
 
 #options = webdriver.ChromeOptions()
 #options.add_argument('--headless') 
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-driver.get(crossref)                                          # load the web page from the URL
-time.sleep(3)                                            # wait for the web page to load
+
+
+#-----Part 1------#
+
+driver.get(crossref)                                          
+time.sleep(3)                                            
 
 #read csv file for references
 ieee = pd.read_csv("ieee.csv")
-refs = ieee['References']
+refs = ieee['References'][:5] # references
 refstring = ''
 for i in refs:
     refstring += i.replace('\n',' ')
@@ -31,6 +40,9 @@ textarea.send_keys(refstring)
 button = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div[2]/form/div/div/button")
 button.click()
 
+
+dois = []
+bibs = []
 # goes to results page
 mytable = driver.find_element(By.CLASS_NAME,'table.table-striped')
 for row in mytable.find_elements(By.TAG_NAME,'tr'):
@@ -39,25 +51,46 @@ for row in mytable.find_elements(By.TAG_NAME,'tr'):
         for cell in elecell:
             try:
                 a = cell.find_element(By.TAG_NAME, 'a')
-                print(a.text)
+                dois.append(a.text[16:]) # dois
             except NoSuchElementException:
                 print("Element not found")
     else:
-        print("Doesn't have doi")
+        dois.append("Doesn't have doi") # non-dois
+print(dois)
 
+#----Part 2------#
 
+# Below code Credits: @ https://scipython.com/blog/doi-to-bibtex/                                          
+# fetch bib of each doi
+for doi in dois:
+    if not (doi ==  "Doesn't have doi"):
+        url = BASE_URL + doi
+        req = urllib.request.Request(url)
+        req.add_header('Accept', 'application/x-bibtex')
+        try:
+            with urllib.request.urlopen(req) as f:
+                bibtex = f.read().decode()
+            print(bibtex)
+        except HTTPError as e:
+            if e.code == 404:
+                print('DOI not found.')
+            else:
+                print('Service unavailable.')
+            sys.exit(1)
 
 '''
+
+#get abstract
 resgate = 'https://www.researchgate.net/search.Search.html?type=publication&query='
 
-req = requests.get(resgate + )
-soup = BeautifulSoup(req.text,'html.parser')
+for i,doi in enumerate(dois):
+    
+    req = requests.get(resgate + doi)
+    soup = BeautifulSoup(req.text,'html.parser')
 
+<div class="nova-legacy-e-expandable-text__container">
 '''
-
-
-
-#driver.quit()
+driver.quit()
 
 
 
