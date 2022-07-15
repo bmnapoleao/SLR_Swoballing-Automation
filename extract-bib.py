@@ -1,10 +1,13 @@
+import os
 import time
 import sys
-import json
 import urllib.request
 from urllib.error import HTTPError
 import requests
 import pandas as pd
+import asyncio
+import pyperclip
+import traceback
 
 from parsel import Selector
 from playwright.sync_api import sync_playwright
@@ -28,7 +31,8 @@ PASSWORD = 'rK.p)z_=Gs2Y6e6'
 
 
 #options = webdriver.ChromeOptions()
-#options.add_argument('--headless') 
+#options.add_argument('--headless')
+
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 
@@ -71,28 +75,70 @@ print(dois)
 
 driver.quit() ####remove in the end
 
-'''
+
 #----Part 1.1----#
 # Extract abstract from bibtex of websites
 
 def runieee(doi,page):
-    page.goto(researchgate,timeout=0)
-    page.click('button[class="layout-btn-white cite-this-btn"]')        
-    
+    page.goto(doi,timeout=0)
+    page.click('button[class="layout-btn-white cite-this-btn"]')
+    time.sleep(3)
+    try:
+        page.locator('div[class="browse-pub-tab"]', has_text="BibTeX").click()
+        page.locator('input[type="checkbox"]').click()
+        time.sleep(3)
+        page.locator('a[class="stats-Cite_This_Doc_Details_Copy"]', has_text="Copy").click() # copying clipboard
+        time.sleep(3)
+        print(pyperclip.paste()) # pasting clipboard
+    except Exception:
+        print("No bib in ieee page")
 
 def runacm(doi,page):
-    
+    page.goto(doi,timeout=0)
+    try:
+        page.click('a[data-title="Export Citation"]')
+        time.sleep(3)
+        page.select_option('select#citation-format', label='BibTeX')
+        page.locator('a[title="Copy citation"]', has_text="Copy citation").click() # copying clipboard
+        time.sleep(3)
+        print(pyperclip.paste()) # pasting clipboard
+    except Exception:
+        print("No bib in acm page")
 
 
 def runspringer(doi,page):
-    
+    page.goto(doi,timeout=0)
+    # Below code credits @https://github.com/microsoft/playwright-python/issues/528
+    try:
+        with page.expect_download() as download_info:
+            page.locator('a[data-test="citation-link"]', has_text=".BIB").click()
+
+        download = download_info.value
+        path = download.path()
+    # Credits end
+        if os.path.exists(path):
+            with open(path, 'r') as f:
+                print(f.read())
+    except Exception:
+        print("No bib in springer page")
 
 
 def runsciencedirect(doi,page):
-    
+    page.goto(doi,timeout=0)
+    try:
+        page.locator('button[class="button button-anchor"]', has_text="Cite").click()
+        time.sleep(3)
+        with page.expect_download() as download_info:
+            page.locator('button[class="button button-anchor u-padding-0"]', has_text="Export citation to BibTeX").click()
 
-
-### httperror 503 wiley (not in researchgate)
+        download = download_info.value
+        path = download.path()
+        print(path)
+        if os.path.exists(path):
+            with open(path, 'r') as f:
+                print(f.read())
+    except Exception:
+        print("No bib in elsevier page")
 
 
 
@@ -105,23 +151,26 @@ with sync_playwright() as p:
     for doi in dois:
         if not (doi=="No doi"):
             try:
-                res = urllib.request.urlopen(url)
+                res = urllib.request.urlopen(doi)
                 nurl = res.geturl()
                 if ("ieee" in nurl):
                     runieee(doi,page)
-                elif ("acm" in nurl):
-                    runacm(doi,page)
                 elif ("springer" in nurl):
                     runspringer(doi,page)
-                #elif ("wiley" in nurl):
-                #    runwiley(doi)
                 elif ("elsevier" in nurl):
                     runsciencedirect(doi,page)
 
-        except HTTPError:
-            continue
-            
+                time.sleep(1)
 
+            except HTTPError as e:
+                if e.code == 403:
+                    runacm(doi,page)
+                else:
+                    print("HTTPError")
+                    traceback.print_exc()
+                continue
+            
+    browser.close()
 '''
 
 
@@ -170,20 +219,10 @@ with sync_playwright() as p:
     for doi in dois:
         if not (doi=="No doi"):
             page.goto(f"https://www.researchgate.net/search.Search.html?type=publication&query={doi}", timeout=0)
-            #https://www.mendeley.com/search/?page=1&query=10.1049/el:20000242&sortBy=relevance
-            #https://www.researchgate.net/search.Search.html?type=publication&query=10.1049/el:20000242
+            
             selector = Selector(text=page.content())
-            
             print(selector.css(".nova-legacy-e-expandable-text__container div::text").get())
-            print(selector.css(".ArticleCardTitle__TitleButton-sc-1jkrcs4-2 span::text").get())
-            
-            #page.click(".ArticleCard__StyledArticleCard-sc-7btn0d-0")
-            #print(selector.css(".ArticleCardTitle__TitleLink-sc-1jkrcs4-1::text").get())
-            #print(selector.css(".ArtiscleCardAbstract__Abstract-sc-8nze5h-0 jlJEmQ ArticleAbstract__Abstract-sc-1gl3y52-0 hLUoOT qe-abstract::text").get())
-            
-            #print(selector.css(".nova-legacy-e-text nova-legacy-e-text--size-xl nova-legacy-e-text--family-sans-serif nova-legacy-e-text--spacing-xs nova-legacy-e-text--color-inherit::text").get())
-            
-            #nova-legacy-e-expandable-text__container
+           
             for author in selector.css(".nova-legacy-c-card__body--spacing-inherit"):
                 name = author.css(".nova-legacy-v-person-item__title a::text").get()
                 thumbnail = author.css(".nova-legacy-v-person-item__image img::attr(src)").get()
@@ -193,7 +232,7 @@ with sync_playwright() as p:
                 skills = author.css(".nova-legacy-v-person-item__stack-item:nth-child(5) span").xpath("normalize-space()").getall()
                 last_publication = author.css(".nova-legacy-v-person-item__info-section-list-item .nova-legacy-e-link--theme-bare::text").get()
                 last_publication_link = f'https://www.researchgate.net{author.css(".nova-legacy-v-person-item__info-section-list-item .nova-legacy-e-link--theme-bare::attr(href)").get()}'
-                '''
+                
                 authors.append({
                     "name": name,
                     "profile_page": profile_page,
@@ -208,7 +247,7 @@ with sync_playwright() as p:
                 })
                 '''
 
-    browser.close()
+    #browser.close()
 
 
 #----Part 4------#
