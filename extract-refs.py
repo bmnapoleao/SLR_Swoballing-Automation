@@ -47,6 +47,22 @@ def ieee(url):
     return refs
 
 
+def elsevier(url):
+    #url = 'https://www.sciencedirect.com/science/article/pii/S0360319921039422'
+    page = rendering(url)
+    soup = BeautifulSoup(page, 'html.parser')
+    #### complete code
+    '''
+    res = soup.find(id='references-section-container')
+    res_data = res.find_all('div', class_='col u-px-1')
+    refs = []
+
+    for num, i in enumerate(res_data):
+        d = i.text
+        refs.append(d)
+
+    return refs
+    '''
 
 def pdfextract(url):
     #url = 'https://arxiv.org/pdf/2007.07751.pdf'
@@ -146,6 +162,8 @@ if __name__ == "__main__":
                 refs = springer(url)
             elif (url.find('acm')!=-1):
                 refs = acm(url)
+            elif (url.find('elsevier')!=-1):
+                refs = elsevier(url)
 
             df = pd.DataFrame(refs)
             # append the references
