@@ -28,7 +28,6 @@ from selenium.common.exceptions import NoSuchElementException
 
 #---CONSTANTS---#
 crossref = 'https://search.crossref.org/references'
-doi2bib = 'https://www.doi2bib.org/'
 BASE_URL = 'http://dx.doi.org/'
 researchgate = 'https://www.researchgate.net/login'
 
