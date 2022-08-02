@@ -119,6 +119,7 @@ def runacm(doi,page):
         page.locator('a[title="Copy citation"]', has_text="Copy citation").click() # copying clipboard
         time.sleep(3)
         b = pyperclip.paste() # pasting clipboard
+        return b
     except Exception:
         #print("No bib in acm page")
         return "No bib"
@@ -204,6 +205,7 @@ def extract_bib_abs(dois):
                         ref.loc[i,'Status'] = "Extraction successful" 
                         
                     time.sleep(1)
+                    #print(bibs[i]+"\n")
 
                 except HTTPError as e:
                     if e.code == 403:
@@ -299,6 +301,7 @@ def extract_abs_also(dois, bibs):
                 db.entries += bib.entries  # update db
 
             elif stat == "Extraction successful":
+                #print(bibs)
                 bib = bibtexparser.loads(bibs[i])
                 db.entries += bib.entries  # update db
                 
@@ -307,10 +310,14 @@ def extract_abs_also(dois, bibs):
         browser.close()
         ref.to_csv('References.csv',index=False)
 
-        # store all bibtex in 1 bib file
-        with open('allbibs.bib', 'w+', encoding = "utf-8") as bibtex_file:
-            bibtexparser.dump(db, bibtex_file)
-    
+        # append all bibtex in 1 bib file
+        if not os.path.isfile('allbibs.bib'):
+            with open('allbibs.bib', 'w+', encoding = "utf-8") as bibtex_file:
+                bibtexparser.dump(db, bibtex_file)
+        else: 
+            with open('allbibs.bib', 'a', encoding = "utf-8") as bibtex_file:
+                bibtexparser.dump(db, bibtex_file)
+                
 ##---Part 3 END---##
 
 
