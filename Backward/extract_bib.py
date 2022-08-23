@@ -99,9 +99,10 @@ def extract_dois(direc, all_indices):
 
 def runieee(doi,page):
     page.goto(doi,timeout=0)
-    page.click('button[class="layout-btn-white cite-this-btn"]', timeout=0)
-    time.sleep(2)
+    
     try:
+        page.click('button[class="layout-btn-white cite-this-btn"]', timeout=15000)
+        time.sleep(2)
         page.locator('div[class="browse-pub-tab"]', has_text="BibTeX").click()
         page.locator('input[type="checkbox"]').click()
         time.sleep(3)
@@ -116,7 +117,7 @@ def runieee(doi,page):
 def runacm(doi,page):
     page.goto(doi,timeout=0)
     try:
-        page.click('a[data-title="Export Citation"]', timeout=0)
+        page.click('a[data-title="Export Citation"]', timeout=15000)
         time.sleep(3)
         page.select_option('select#citation-format', label='BibTeX')
         page.locator('a[title="Copy citation"]', has_text="Copy citation").click() # copying clipboard
@@ -133,7 +134,7 @@ def runspringer(doi,page):
     # Below code credits @https://github.com/microsoft/playwright-python/issues/528 #
     try:
         with page.expect_download() as download_info:
-            page.locator('a[data-test="citation-link"]', has_text=".BIB", timeout=0).click()
+            page.locator('a[data-test="citation-link"]', has_text=".BIB", timeout=15000).click()
 
         download = download_info.value
         path = download.path()
@@ -222,7 +223,7 @@ def extract_bib_abs(dois, direc, cell_indices):
                     time.sleep(1)
                     #print(bibs[i]+"\n")
 
-                except HTTPError as e:
+                except Exception as e:
                     if e.code == 403:
                         #b = runacm(doi,page)
                         #if b == "No bib":
@@ -324,7 +325,8 @@ def extract_abs_also(dois, bibs, direc, n_iter, cell_indices,snowtype):
                 bib = bibtexparser.loads(bibs[j])
                 db.entries += bib.entries  # update db
                 
-            ref.loc[i,'Iteration'] = n_iter 
+            ref.loc[i,'Iteration'] = n_iter
+            time.sleep(1)
             
         with open(direc,'w', encoding = "utf-8",newline='') as f:
             ref.to_csv(f, index=False)

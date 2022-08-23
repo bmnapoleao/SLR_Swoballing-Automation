@@ -61,7 +61,17 @@ def doi_helper(refs):
 
 def search_sscholar(doi):
     sch = SemanticScholar(timeout=2)
-    paper = sch.paper(doi[16:])
+    length = 16
+    
+    if "http://dx.doi.org" in doi:
+        length = 18
+    elif "https://dx.doi.org" in doi:
+        length = 19
+    elif "https://doi.org" in doi:
+        length = 16
+    elif "http://doi.org" in doi:
+        length = 15
+    paper = sch.paper(doi[length:])
     return paper
 
 
@@ -91,7 +101,7 @@ def search_cites(paper):
     if refs:
         new_dois = doi_helper(refs)
         citations = citations + new_dois
-    
+    #print(len(citations),len(all_refs))
     return citations, all_refs
 
 
