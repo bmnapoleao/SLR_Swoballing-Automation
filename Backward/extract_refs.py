@@ -11,6 +11,9 @@ from urllib.error import HTTPError
 from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 
+from parsel import Selector
+from playwright.sync_api import sync_playwright
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -49,20 +52,24 @@ def ieee(url):
 
 def elsevier(url):
     #url = 'https://www.sciencedirect.com/science/article/pii/S0360319921039422'
-    page = rendering(url)
-    soup = BeautifulSoup(page, 'html.parser')
-    #### complete code
-    '''
-    res = soup.find(id='references-section-container')
-    res_data = res.find_all('div', class_='col u-px-1')
-    refs = []
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False, slow_mo=50) #doesn't work if headless
+        page = browser.new_page()
 
-    for num, i in enumerate(res_data):
-        d = i.text
-        refs.append(d)
+        page.goto(url)
+        time.sleep(3)
+        r = page.locator('dd[class="reference"]')
+        c = r.count()
+        #print(c)
+        refs = []
+        
+        for i in range(c):
+             text = r.nth(i).inner_text()
+             refs.append(text)
 
-    return refs
-    '''
+        return refs
+
+    
 
 def pdfextract(url):
     #url = 'https://arxiv.org/pdf/2007.07751.pdf'
@@ -130,57 +137,4 @@ def acm(url):
             refs.append(d)
 
         return refs
-
-
-
-
-
-if __name__ == "__main__":
-    try:
-        text = ''
-        filepath = Path('links.txt')
-        # create the file if it doesn't exist
-        filepath.touch(exist_ok=True)
-        with open('links.txt', 'r') as f:
-            text = f.read()
-            f.close()
-            
-        links = text.split('\n')
-        url = input("Enter url: ")
-        res =''; nurl=''
-        if "acm" not in url:
-            res = urllib.request.urlopen(url)
-            nurl = res.geturl()
-        
-        if url not in links:
-            refs = []
-            if (nurl.find('ieee')!=-1):
-                refs = ieee(url)
-            elif (nurl.find('.pdf')!=-1): # better than before
-                refs = pdfextract(url)
-            elif (nurl.find('springer')!=-1): 
-                refs = springer(url)
-            elif (url.find('acm')!=-1):
-                refs = acm(url)
-            elif (url.find('elsevier')!=-1):
-                refs = elsevier(url)
-
-            df = pd.DataFrame(refs)
-            # append the references
-            if not os.path.isfile('References.csv'):
-               df.to_csv('References.csv', index=False, header=["References"])
-            else: 
-               df.to_csv('References.csv', mode='a',index=False, header=False)
-
-            # append the link
-            with open('links.txt', 'a') as fd:
-                fd.write(url+'\n')  # includes the original url, not redirected one
-
-                
-        else:
-            print("Link exists! References already extracted.")
-        
-    except HTTPError as e:
-        print("HTTPError. Can't extract references.")
-        traceback.print_exc()
 

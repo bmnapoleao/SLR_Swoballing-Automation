@@ -40,8 +40,8 @@ PASSWORD = 'rK.p)z_=Gs2Y6e6'
 
 
 #-----Part 1------#
-
-def extract_dois():
+# not needed
+def extract_dois(direc, all_indices):
 
     #options = webdriver.ChromeOptions() #### uncomment at the end
     #options.add_argument('--headless')  #### uncomment at the end
@@ -51,7 +51,7 @@ def extract_dois():
     time.sleep(3)                                            
 
     #read csv file for references
-    ref = pd.read_csv("References.csv")
+    ref = pd.read_csv(direc)
     ref['Status'] = ""
     refs = ref['References'] 
     refstring = ''
@@ -64,26 +64,29 @@ def extract_dois():
     textarea.send_keys(refstring)
     button = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div[2]/form/div/div/button") 
     button.click()
+    time.sleep(3) #504 error possible
 
-
-    dois = []
+    dois = [] 
     # goes to results page
     mytable = driver.find_element(By.CLASS_NAME,'table.table-striped')
-    for i,row in enumerate(mytable.find_elements(By.TAG_NAME,'tr')):
-        elecell = row.find_elements(By.TAG_NAME,'td')
-        if len(elecell)==1:
-            for cell in elecell:
-                try:
-                    a = cell.find_element(By.TAG_NAME, 'a')
-                    dois.append(a.text) # dois [16:] - to remove the url part
-                except NoSuchElementException:
-                    print("Element not found")
+    for j,row in enumerate(mytable.find_elements(By.TAG_NAME,'tr')):
+        if j==1:
+            continue # for heading element
         else:
-            dois.append("No doi") # non-dois
-            ref.loc[i-1,'Status'] = "DOI not found" # i-1 because 1st element(the heading) is skipped
-
+            i = all_indices[j-1]
+            elecell = row.find_elements(By.TAG_NAME,'td')
+            if len(elecell)==1:
+                for cell in elecell:
+                    try:
+                        a = cell.find_element(By.TAG_NAME, 'a')
+                        dois.append(a.text) # dois [16:] - to remove the url part
+                    except NoSuchElementException:
+                        print("Element not found")
+            else:
+                dois.append("No doi") # non-dois
+                ref.loc[i,'Status'] = "DOI not found" 
     driver.quit()
-    ref.to_csv('References.csv',index=False)
+    ref.to_csv(direc,index=False)
 
     return dois
 
@@ -96,8 +99,8 @@ def extract_dois():
 
 def runieee(doi,page):
     page.goto(doi,timeout=0)
-    page.click('button[class="layout-btn-white cite-this-btn"]')
-    time.sleep(3)
+    page.click('button[class="layout-btn-white cite-this-btn"]', timeout=0)
+    time.sleep(2)
     try:
         page.locator('div[class="browse-pub-tab"]', has_text="BibTeX").click()
         page.locator('input[type="checkbox"]').click()
@@ -106,22 +109,22 @@ def runieee(doi,page):
         time.sleep(3)
         b = pyperclip.paste() # pasting clipboard
         return b
+    
     except Exception:
-        #print("No bib in ieee page")
         return "No bib"
 
 def runacm(doi,page):
     page.goto(doi,timeout=0)
     try:
-        page.click('a[data-title="Export Citation"]')
+        page.click('a[data-title="Export Citation"]', timeout=0)
         time.sleep(3)
         page.select_option('select#citation-format', label='BibTeX')
         page.locator('a[title="Copy citation"]', has_text="Copy citation").click() # copying clipboard
         time.sleep(3)
         b = pyperclip.paste() # pasting clipboard
         return b
+    
     except Exception:
-        #print("No bib in acm page")
         return "No bib"
 
 
@@ -130,7 +133,7 @@ def runspringer(doi,page):
     # Below code credits @https://github.com/microsoft/playwright-python/issues/528 #
     try:
         with page.expect_download() as download_info:
-            page.locator('a[data-test="citation-link"]', has_text=".BIB").click()
+            page.locator('a[data-test="citation-link"]', has_text=".BIB", timeout=0).click()
 
         download = download_info.value
         path = download.path()
@@ -142,15 +145,15 @@ def runspringer(doi,page):
                 return b
         else:
             return "No bib"
+        
     except Exception:
-        #print("No bib in springer page")
         return "No bib"
 
-
+'''
 def runsciencedirect(doi,page):
     page.goto(doi,timeout=0)
     try:
-        page.locator('button[class="button button-anchor"]', has_text="Cite").click()
+        page.locator('button[class="button button-anchor"]', has_text="Cite", timeout=0).click()
         time.sleep(3)
         with page.expect_download() as download_info:
             page.locator('button[class="button button-anchor u-padding-0"]', has_text="Export citation to BibTeX").click()
@@ -164,42 +167,54 @@ def runsciencedirect(doi,page):
                 return b
         else:
             return "No bib"
+        
     except Exception:
-        #print("No bib in elsevier page")
         return "No bib"
 
+'''
 
 
-
-def extract_bib_abs(dois):
+def extract_bib_abs(dois, direc, cell_indices):
     bibs = []
-    ref = pd.read_csv("References.csv")
+    ref = pd.read_csv(direc)
     b = ""
     
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False, slow_mo=50)
         page = browser.new_page(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36")
 
-        for i,doi in enumerate(dois):
+        for j,doi in enumerate(dois):
+            i = cell_indices[j]
             if not (doi=="No doi"):
                 try:
+                    
+                    #print(i,doi)
                     res = urllib.request.urlopen(doi)
                     nurl = res.geturl()
-                    if ("ieee" in nurl):
+                    if ("pdf" in nurl):
+                        b = extract_only_bib(doi,ref,i)
+                        
+                    elif ("ieee" in nurl):
                         b = runieee(doi,page)
                             
                     elif ("springer" in nurl):
                         b = runspringer(doi,page)
                             
-                    elif ("elsevier" in nurl):
-                        b = runsciencedirect(doi,page)
+                    #elif ("elsevier" in nurl):
+                     #   b = runsciencedirect(doi,page)
                         
                     else:
-                        b = extract_only_bib(doi,ref,i)
+                        b = "Not standard"
+
+
 
                         
                     if b == "No bib":
                         bibs.append(extract_only_bib(doi,ref,i))
+                        
+                    elif b == "Not standard":
+                        bibs.append(extract_only_bib(doi,ref,i))
+                        
                     else:
                         bibs.append(b)
                         ref.loc[i,'Status'] = "Extraction successful" 
@@ -209,27 +224,29 @@ def extract_bib_abs(dois):
 
                 except HTTPError as e:
                     if e.code == 403:
-                        b = runacm(doi,page)
-                        
-                        if b == "No bib":
-                            bibs.append(extract_only_bib(doi,ref,i))
-                        else:
-                            bibs.append(b)
-                            ref.loc[i,'Status'] = "Extraction successful" 
+                        #b = runacm(doi,page)
+                        #if b == "No bib":
+                        bibs.append(extract_only_bib(doi,ref,i))
+                            
                     else:
                         print("HTTPError")
                         bibs.append(extract_only_bib(doi,ref,i))
                         #traceback.print_exc()
+                        
                     continue
             else:
                 bibs.append("No doi")
                 
+
+        with open(direc,'w', encoding = "utf-8",newline='') as f:
+            ref.to_csv(f, index=False)     
         browser.close()
-        ref.to_csv('References.csv',index=False)
+       
         return bibs
 
 
 ##----Part 1.1 END----##
+
 
 
 
@@ -263,8 +280,8 @@ def extract_only_bib(doi,ref,i):
 
 #----Part 3------#
 # Get abstract from researchgate
-def extract_abs_also(dois, bibs):
-    ref = pd.read_csv("References.csv")
+def extract_abs_also(dois, bibs, direc, n_iter, cell_indices,snowtype):
+    ref = pd.read_csv(direc)
     abstract = ""
     
     with sync_playwright() as p:
@@ -280,7 +297,9 @@ def extract_abs_also(dois, bibs):
         db = BibDatabase()
         bib = ''
         
-        for i,doi in enumerate(dois):
+        for j,doi in enumerate(dois):
+            i = cell_indices[j]
+            #print(i,doi)
             stat = ref.loc[i,'Status']
             #print(stat)
             if stat not in ["DOI not found","Extraction successful","BIB not found"]:
@@ -289,9 +308,9 @@ def extract_abs_also(dois, bibs):
                 selector = Selector(text=page.content())
                 abstract = selector.css(".nova-legacy-e-expandable-text__container div::text").get() # extract abstract
 
-                bib = bibtexparser.loads(bibs[i])
+                bib = bibtexparser.loads(bibs[j])
                 #print(bib.entries)
-                if abstract:
+                if abstract and len(abstract)>3:
                     bib.entries[0]['abstract'] = abstract # update in bib
                     ref.loc[i,'Status'] = "Extraction successful"
                     
@@ -302,38 +321,30 @@ def extract_abs_also(dois, bibs):
 
             elif stat == "Extraction successful":
                 #print(bibs)
-                bib = bibtexparser.loads(bibs[i])
+                bib = bibtexparser.loads(bibs[j])
                 db.entries += bib.entries  # update db
                 
+            ref.loc[i,'Iteration'] = n_iter 
             
-
+        with open(direc,'w', encoding = "utf-8",newline='') as f:
+            ref.to_csv(f, index=False)
         browser.close()
-        ref.to_csv('References.csv',index=False)
+        
 
+        #p = str(direc)
+        #root = p[:p.find('References')]
+        filename = 'allbibs-'+snowtype+'.bib'
+        #b_dir = os.path.join(root, filename)
         # append all bibtex in 1 bib file
-        if not os.path.isfile('allbibs.bib'):
-            with open('allbibs.bib', 'w+', encoding = "utf-8") as bibtex_file:
+        if not os.path.isfile(filename):
+            with open(filename, 'w+', encoding = "utf-8") as bibtex_file:
                 bibtexparser.dump(db, bibtex_file)
         else: 
-            with open('allbibs.bib', 'a', encoding = "utf-8") as bibtex_file:
+            with open(filename, 'a', encoding = "utf-8") as bibtex_file:
                 bibtexparser.dump(db, bibtex_file)
+
+
                 
 ##---Part 3 END---##
 
 
-
-
-if __name__ == "__main__":
-
-    dois = extract_dois()
-    #print(dois)
-    bibs = extract_bib_abs(dois)
-    print(len(bibs),len(dois))
-    extract_abs_also(dois,bibs) 
-    
-    # Rename References.csv
-    try:
-        os.rename("References.csv", "References-updated.csv")
-    except OSError as exc:
-        print(f'WARNING: could not rename References : {exc}')
-    
