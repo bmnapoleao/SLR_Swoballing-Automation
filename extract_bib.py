@@ -18,11 +18,7 @@ from parsel import Selector
 from playwright.sync_api import sync_playwright
 
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.common.exceptions import NoSuchElementException
+
 
 
 
@@ -39,62 +35,7 @@ PASSWORD = 'rK.p)z_=Gs2Y6e6'
 
 
 
-#-----Part 1------#
-# not needed
-def extract_dois(direc, all_indices):
-
-    #options = webdriver.ChromeOptions() #### uncomment at the end
-    #options.add_argument('--headless')  #### uncomment at the end
-
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    driver.get(crossref)                                          
-    time.sleep(3)                                            
-
-    #read csv file for references
-    ref = pd.read_csv(direc)
-    ref['Status'] = ""
-    refs = ref['References'] 
-    refstring = ''
-    for i in refs:
-        refstring += i.replace('\n',' ')
-        refstring += '\n'
-
-    #input refstring in text area
-    textarea = driver.find_element(By.NAME, "references")
-    textarea.send_keys(refstring)
-    button = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div[2]/form/div/div/button") 
-    button.click()
-    time.sleep(3) #504 error possible
-
-    dois = [] 
-    # goes to results page
-    mytable = driver.find_element(By.CLASS_NAME,'table.table-striped')
-    for j,row in enumerate(mytable.find_elements(By.TAG_NAME,'tr')):
-        if j==1:
-            continue # for heading element
-        else:
-            i = all_indices[j-1]
-            elecell = row.find_elements(By.TAG_NAME,'td')
-            if len(elecell)==1:
-                for cell in elecell:
-                    try:
-                        a = cell.find_element(By.TAG_NAME, 'a')
-                        dois.append(a.text) # dois [16:] - to remove the url part
-                    except NoSuchElementException:
-                        print("Element not found")
-            else:
-                dois.append("No doi") # non-dois
-                ref.loc[i,'Status'] = "DOI not found" 
-    driver.quit()
-    ref.to_csv(direc,index=False)
-
-    return dois
-
-##----Part 1 END----##
-
-
-
-#----Part 1.1----#
+#----Part 1----#
 # Extract bibtex having abstract from websites
 
 def runieee(doi,page):
@@ -114,6 +55,9 @@ def runieee(doi,page):
     except Exception:
         return "No bib"
 
+
+'''
+# doesn't reach this function because of 403 error
 def runacm(doi,page):
     page.goto(doi,timeout=0)
     try:
@@ -127,6 +71,7 @@ def runacm(doi,page):
     
     except Exception:
         return "No bib"
+'''
 
 
 def runspringer(doi,page):
@@ -151,6 +96,7 @@ def runspringer(doi,page):
         return "No bib"
 
 '''
+# doesn't reach this function because of 403 error
 def runsciencedirect(doi,page):
     page.goto(doi,timeout=0)
     try:
@@ -246,7 +192,7 @@ def extract_bib_abs(dois, direc, cell_indices):
         return bibs
 
 
-##----Part 1.1 END----##
+##----Part 1 END----##
 
 
 

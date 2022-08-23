@@ -9,10 +9,8 @@ import pandas as pd
 
 p = str(pathlib.Path(__file__))
 ROOT = p[:p.find('main')]
-sys.path.append(ROOT+'Backward')
-sys.path.append(ROOT+'Forward')
 
-from extract_refs import *
+
 from extract_bib import *
 from extract_cits import *
 
@@ -219,7 +217,7 @@ def backward(links, num_iter, seed_papers):
                     last = ref.loc[ref['References'] == refs[j]].index.values
                     cell_index = last[len(last)-1]
                     all_indices.append(cell_index)
-                #dois = extract_dois(direc,all_indices)
+                
                 #print(all_indices) 
                 # insert code for checking
                 completed = ''
