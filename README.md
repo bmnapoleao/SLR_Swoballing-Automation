@@ -1,7 +1,7 @@
 # Snowballing_Automation
 
-* The project automates Snowballing - a method of conducting Systematic Literature Reviews. It implements the two types of Snowballing: Backward Snowballing, which uses the outgoing references from a paper to identify new new potential papers; and Forward Snowballing, which identifies new papers using incoming references or citations to a paper. Here, the Reference string containing the Author names, Title, Publisher name, Year are extracted along with the bibtex of the papers containing the Abstracts. It is proposed that the Deep Learning model based on BERT will identify which papers are relevant to the study.
-*
+The project automates **Snowballing** - a method of conducting Systematic Literature Reviews. It implements the two types of Snowballing: **Backward Snowballing**, which uses the outgoing references from a paper to identify new new potential papers; and **Forward Snowballing**, which identifies new papers using incoming references or citations to a paper. Here, the Reference string containing the Author names, Title, Publisher name, Year are extracted along with the bibtex of the papers containing the Abstracts. It is proposed that the Deep Learning model based on BERT will identify which papers are relevant to the study. 
+
 
   
 ### A. How to run the code:
@@ -20,7 +20,7 @@
   ```
   $ python create_dataset.py
   ```
-3. Open the Snowballing_classification_bert.ipynb notebook in Google Colab and put the Training.csv and Testing.csv files created in step 2.
+3. Open the Snowballing_classification_bert.ipynb notebook in Google Colab and upload the Training.csv and Testing.csv files created in step 2.
 4. Train and evaluate the classifier on the dataset. You can finetune the hyperparameters as needed.
 
 
