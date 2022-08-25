@@ -127,7 +127,11 @@ def seed_iter(links):
     direc = os.path.join(ROOT, 'References.csv')
     # append the references
     if not os.path.isfile('References.csv'): 
-       df.to_csv('References.csv', index=False, header=["References"])
+        df.to_csv('References.csv', index=False, header=["References"])
+        ref = pd.read_csv(direc)
+        ref['Status'] = ""
+        ref['Iteration']=0
+        ref.to_csv(direc,index=False)
     
 
     ref = pd.read_csv(direc)
@@ -199,13 +203,12 @@ def backward(links, num_iter, seed_papers):
                 else:
                     ref = pd.read_csv(direc)
                     
-                    #for val in refs:
-                       # ref.append({'References':val}, ignore_index=True)
+                    
                     inde = all_indices[len(all_indices)-1]+1
                     for k,val in enumerate(refs):
                         ref.loc[inde+k,'References'] = val
                     print(ref.tail())
-                    #ref.to_csv(direc,index=False)
+        
                     with open(direc,'w', encoding = "utf-8",newline='') as f:
                         ref.to_csv(f, index=False)
                 
@@ -268,7 +271,7 @@ if __name__ == "__main__":
         stype = int(input('Enter choice for Type of Snowballing (integer) \n 1. Backward 2.Forward 3.Both \nChoice: '))
 
         text = ''
-        #----file must contain the links to the seed papers----#
+        #----file must contain the links to the seed papers as dois----#
         with open('links.txt', 'r') as f:
             text = f.read()
             f.close()          
@@ -285,7 +288,6 @@ if __name__ == "__main__":
             forward(links, num_iter, papers)
         else:
             print('\n__Backward and Forward Snowballing__\n')
-            # In case of both, seed paper details are stored in Backward folder in References.csv
             papers = seed_iter(links)
             backward(links, num_iter, papers)
             forward(links, num_iter, papers)

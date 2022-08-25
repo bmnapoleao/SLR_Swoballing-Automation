@@ -76,7 +76,7 @@ df = pd.DataFrame(list(zip(title, abst, inc_exc)), columns=['Title','Abstract','
 df.to_csv('Testing.csv',index=False)
 
 
-#Testing-exc
+#Testing-inc
 db = ''
 parser = BibTexParser(common_strings = True)
 

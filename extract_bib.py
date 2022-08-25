@@ -217,7 +217,8 @@ def extract_only_bib(doi,ref,i):
                 ref.loc[i,'Status'] = "BIB not found" 
                 return "No bib"
             else:
-                print('Service unavailable.')
+                print('Service unavailable. 504 error')
+                ref.loc[i,'Status'] = "BIB not found" 
                 return "No bib"
             
 # Credits end
@@ -279,10 +280,7 @@ def extract_abs_also(dois, bibs, direc, n_iter, cell_indices,snowtype):
         browser.close()
         
 
-        #p = str(direc)
-        #root = p[:p.find('References')]
         filename = 'allbibs-'+snowtype+'.bib'
-        #b_dir = os.path.join(root, filename)
         # append all bibtex in 1 bib file
         if not os.path.isfile(filename):
             with open(filename, 'w+', encoding = "utf-8") as bibtex_file:

@@ -49,7 +49,7 @@ def doi_helper(refs):
             for cell in elecell:
                 try:
                     a = cell.find_element(By.TAG_NAME, 'a')
-                    dois.append(a.text) # dois [16:] - to remove the url part
+                    dois.append(a.text) 
                 except NoSuchElementException:
                     print("Element not found")
         else:
@@ -71,7 +71,7 @@ def search_sscholar(doi):
         length = 16
     elif "http://doi.org" in doi:
         length = 15
-    paper = sch.paper(doi[length:])
+    paper = sch.paper(doi[length:]) # to remove the url part
     return paper
 
 
