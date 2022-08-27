@@ -37,67 +37,69 @@ def forward(links, num_iter, seed_papers):
                 citations, refs = search_cites(paper)
                 all_dois = all_dois + citations
                 
-                # append the citations
-                direc = 'References-forw.csv'
-                if not os.path.isfile(direc):
-                    df = pd.DataFrame(refs)
-                    df.to_csv(direc, index=False, header=["References"])
+                if refs:
+                    # append the citations
+                    direc = 'References-forw.csv'
+                    if not os.path.isfile(direc):
+                        df = pd.DataFrame(refs)
+                        df.to_csv(direc, index=False, header=["References"])
+                        ref = pd.read_csv(direc)
+                        ref['DOIS']=""
+                        ref['Iteration']=0
+                        ref['Status'] = ""
+                        ref.to_csv(direc,index=False)
+                    else: 
+                        ref = pd.read_csv(direc)
+                        #print(len(all_indices))
+                        inde = all_indices[len(all_indices)-1]+1
+                        for k,val in enumerate(refs):
+                            ref.loc[inde+k,'References'] = val
+                        print(ref.tail())
+                        with open(direc,'w', encoding = "utf-8",newline='') as f:
+                            ref.to_csv(f, index=False)
+                    
+                    
                     ref = pd.read_csv(direc)
-                    ref['DOIS']=""
-                    ref['Iteration']=0
-                    ref['Status'] = ""
-                    ref.to_csv(direc,index=False)
-                else: 
-                    ref = pd.read_csv(direc)
-                    inde = all_indices[len(all_indices)-1]+1
-                    for k,val in enumerate(refs):
-                        ref.loc[inde+k,'References'] = val
-                    print(ref.tail())
+                        
+                    dois = citations # dois in a variable
+
+                    all_indices = []
+                    for j, s in enumerate(refs):
+                        last = ref.loc[ref['References'] == refs[j]].index.values
+                        cell_index = last[len(last)-1]
+                        all_indices.append(cell_index)
+                    
+                    # insert code for checking
+                    completed = ''
+                    if i==1:
+                        completed = links
+                    else:
+                        completed = ref['DOIS']
+                        
+                    n_dois = []
+                    cell_indices = []
+                    for j, s in enumerate(dois):
+                        last = ref.loc[ref['References'] == refs[j]].index.values
+                        cell_index = last[len(last)-1]
+                        if not (s=="No doi"):
+                            print(f'\nIndex of doi: {s} = {cell_index}')
+                            if s in completed:
+                                # mark done already in reference
+                                ref.loc[cell_index,'Iteration'] = i+1
+                                iteration = ref.loc[last[0],'Iteration']
+                                ref.loc[cell_index,'Status'] = "Done already in " +str(iteration)
+                            else:
+                                n_dois.append(s)
+                                cell_indices.append(cell_index)
+                        else:
+                            ref.loc[cell_index,'Iteration'] = i+1
+                            ref.loc[cell_index,'Status'] = "DOI not found"
+
+                    for k,val in enumerate(dois):
+                        ind = all_indices[k]
+                        ref.loc[ind,'DOIS'] = val
                     with open(direc,'w', encoding = "utf-8",newline='') as f:
                         ref.to_csv(f, index=False)
-                
-                
-                ref = pd.read_csv(direc)
-                    
-                dois = citations # dois in a variable
-
-                all_indices = []
-                for j, s in enumerate(refs):
-                    last = ref.loc[ref['References'] == refs[j]].index.values
-                    cell_index = last[len(last)-1]
-                    all_indices.append(cell_index)
-                
-                # insert code for checking
-                completed = ''
-                if i==1:
-                    completed = links
-                else:
-                    completed = ref['DOIS']
-                    
-                n_dois = []
-                cell_indices = []
-                for j, s in enumerate(dois):
-                    last = ref.loc[ref['References'] == refs[j]].index.values
-                    cell_index = last[len(last)-1]
-                    if not (s=="No doi"):
-                        print(f'\nIndex of doi: {s} = {cell_index}')
-                        if s in completed:
-                            # mark done already in reference
-                            ref.loc[cell_index,'Iteration'] = i+1
-                            iteration = ref.loc[last[0],'Iteration']
-                            ref.loc[cell_index,'Status'] = "Done already in " +str(iteration)
-                        else:
-                            n_dois.append(s)
-                            cell_indices.append(cell_index)
-                    else:
-                        ref.loc[cell_index,'Iteration'] = i+1
-                        ref.loc[cell_index,'Status'] = "DOI not found"
-
-                for k,val in enumerate(dois):
-                    ind = all_indices[k]
-                    ref.loc[ind,'DOIS'] = val
-                with open(direc,'w', encoding = "utf-8",newline='') as f:
-                    ref.to_csv(f, index=False)
 
                 
                 bibs = extract_bib_abs(n_dois, direc, cell_indices)
