@@ -16,7 +16,7 @@ Note: User must have an institutional account on Researchgate and fill the const
 
 ### B. To train the Machine Learning model:
 1. Take the allbibs-(type).bib files and turn them into Training and Testing sets by partitioning them into Training_Excluded.bib, Training_Included.bib, Testing_Excluded.bib, Testing_Included.bib. Training set should include the bibs extracted from the seed set while Testing set should include the potentially relevant papers identified.
-2. Place the newly created bibs into the ./MLclassifier directory and run 
+2. Place the newly created bibs into the ./MLclassifier_prelim directory and run 
   ```
   $ python create_dataset.py
   ```
