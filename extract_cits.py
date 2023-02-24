@@ -16,7 +16,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 ##---CONSTANTS---##
-BASE_URL = 'http://dx.doi.org/'
+BASE_URL = 'https://doi.org/'
 crossref = 'https://search.crossref.org/references'
 zotero = 'https://zbib.org/'
 
@@ -24,7 +24,11 @@ zotero = 'https://zbib.org/'
 
 # extract dois for websites
 def doi_helper(refs):
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    options = webdriver.ChromeOptions()
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--remote-debugging-port=9222')
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     driver.get(crossref)                                          
     time.sleep(3)
     
@@ -39,7 +43,7 @@ def doi_helper(refs):
     button = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div[2]/form/div/div/button") 
     button.click()
 
-
+    time.sleep(10)
     dois = []
     # goes to results page
     mytable = driver.find_element(By.CLASS_NAME,'table.table-striped')
@@ -60,7 +64,7 @@ def doi_helper(refs):
 
 
 def search_sscholar(doi):
-    sch = SemanticScholar(timeout=2)
+    sch = SemanticScholar(timeout=100)
     length = 16
     
     if "http://dx.doi.org" in doi:
@@ -72,7 +76,11 @@ def search_sscholar(doi):
     elif "http://doi.org" in doi:
         length = 15
     paper = sch.paper(doi[length:]) # to remove the url part
-    return paper
+    if paper.keys():
+        return paper
+    else:
+        print("No response from Semantic scholar api for doi: ",doi)
+        return []
 
 
 # get the citations to the papers
@@ -98,9 +106,33 @@ def search_cites(paper):
             refs.append(reference)
             
     # search for doi if not there
+    
     if refs:
-        new_dois = doi_helper(refs)
-        citations = citations + new_dois
+        print(len(refs))
+        low=0; up=40
+        if len(refs)>40:
+            mod = len(refs)//40
+            if (len(refs)/40)>float(mod):
+                mod=mod+1
+            print(mod)
+            #print("Getting from crossref: ",len(refs))
+            for k in range(mod):
+                if k==(mod-1):
+                    low+=40
+                    up = len(refs)
+                elif k!=0:
+                    low+=40
+                    up+=40
+                print(low,up)
+                #print(refs[low:up])
+                new_dois = doi_helper(refs[low:up])
+                citations = citations + new_dois
+                time.sleep(100)
+    
+        else:
+            new_dois = doi_helper(refs)
+            citations = citations + new_dois
+            
     #print(len(citations),len(all_refs))
     return citations, all_refs
 

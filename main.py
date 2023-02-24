@@ -1,6 +1,7 @@
 import pathlib
 import sys
 import os
+import time
 import requests
 import urllib.request
 import traceback
@@ -20,21 +21,33 @@ BASE_URL = 'https://doi.org/'
 def forward(links, num_iter, seed_papers):
     try:
         # links must be doi
-        for i in range(num_iter): #for iterations
+        for i in range(1,num_iter+1): #for iterations
             papers = []
-            if i>0:
+            if i>1:
                 links = list(filter(("No doi").__ne__, all_dois))
-                #print(len(links))
+                print(len(links))
+                torem = []
+                # 100 requests allowed by Semantic Scholar per 5 minutes
                 for doi in links:
                     paper = search_sscholar(doi)
-                    papers.append(paper)
+                    if paper:
+                        papers.append(paper)
+                        if len(links)>100:
+                            time.sleep(10)
+                    else:
+                        torem.append(doi)
+                for ele in torem:
+                    links.remove(ele)
             else:
                 papers = seed_papers
 
             all_dois = []
             for paper in papers:
                 dois = []
+                print("Getting citations and dois for paper:")
+                print(paper['doi'])
                 citations, refs = search_cites(paper)
+                
                 all_dois = all_dois + citations
                 
                 if refs:
@@ -85,14 +98,14 @@ def forward(links, num_iter, seed_papers):
                             print(f'\nIndex of doi: {s} = {cell_index}')
                             if s in completed:
                                 # mark done already in reference
-                                ref.loc[cell_index,'Iteration'] = i+1
+                                ref.loc[cell_index,'Iteration'] = i
                                 iteration = ref.loc[last[0],'Iteration']
                                 ref.loc[cell_index,'Status'] = "Done already in " +str(iteration)
                             else:
                                 n_dois.append(s)
                                 cell_indices.append(cell_index)
                         else:
-                            ref.loc[cell_index,'Iteration'] = i+1
+                            ref.loc[cell_index,'Iteration'] = i
                             ref.loc[cell_index,'Status'] = "DOI not found"
 
                     for k,val in enumerate(dois):
@@ -101,10 +114,10 @@ def forward(links, num_iter, seed_papers):
                     with open(direc,'w', encoding = "utf-8",newline='') as f:
                         ref.to_csv(f, index=False)
 
-                
+                print(len(n_dois))
                 bibs = extract_bib_abs(n_dois, direc, cell_indices)
-                extract_abs_also(n_dois, bibs, direc, i+1, cell_indices,'forw')
-
+                extract_abs_also(n_dois, bibs, direc, i, cell_indices,'forw')
+                
                 
 
          
@@ -119,12 +132,22 @@ def forward(links, num_iter, seed_papers):
 def seed_iter(links):
     refs = []
     papers = []
+    print("Performing seed iter for: ")
+    torem=[]
     for doi in links:
         paper = search_sscholar(doi)
-        reference = get_refs(paper)
-        refs.append(reference)
-        papers.append(paper)
-        
+        if paper:
+            #print(doi)
+            reference = get_refs(paper)
+            #print(reference)
+            refs.append(reference)
+            papers.append(paper)
+        else:
+            torem.append(doi)
+    for ele in torem:
+        links.remove(ele)
+    print(len(refs),len(links))
+    
     df = pd.DataFrame(refs)
     direc = os.path.join(ROOT, 'References.csv')
     # append the references
@@ -145,7 +168,9 @@ def seed_iter(links):
     #print(all_indices)
     bibs = extract_bib_abs(links, direc, all_indices)
     extract_abs_also(links,bibs, direc, 0, all_indices,'seed')
+    
     return papers
+    
     
     
 
@@ -154,22 +179,36 @@ def seed_iter(links):
 
 def backward(links, num_iter, seed_papers):
    
-    for i in range(num_iter): #for iterations
+    for i in range(1,num_iter+1): #for iterations
+        print("___Commencing round %d backward___" %(i))
         papers = []
-        if i>0:
+        if i>1:
             links = list(filter(("No doi").__ne__, all_dois))
             print(len(links))
+            # 100 requests allowed by Semantic Scholar per 5 minutes
+            torem = []
             for doi in links:
                 paper = search_sscholar(doi)
-                papers.append(paper)
+                if paper:
+                    papers.append(paper)
+                    if len(links)>100:
+                        time.sleep(10)
+                else:
+                    torem.append(doi)
+                    
+            for ele in torem:
+                links.remove(ele)
         else:
             papers = seed_papers
+            
         all_dois = []
         for paper in papers:
             dois = []
             refs = []
             ref_nodoi = []
             rs = paper['references']
+            print("Getting references and dois for paper:")
+            print(paper['doi'])
             for p in range(len(rs)):
                 reference = get_refs(rs[p])
                 
@@ -180,10 +219,31 @@ def backward(links, num_iter, seed_papers):
                     ref_nodoi.append(reference)
 
             if ref_nodoi:
-                new_dois = doi_helper(ref_nodoi) # search for doi if not already there
-                refs = refs + ref_nodoi
-                dois = dois + new_dois
-            #print(len(refs),len(dois))
+                print("Getting dois for nodois in semantic scholar")
+                print(len(ref_nodoi))
+                low=0; up=30
+                if len(ref_nodoi)>30:
+                    mod = len(ref_nodoi)//30
+                    if (len(ref_nodoi)/30)>float(mod):
+                        mod=mod+1
+                    print(mod)
+                    for k in range(mod):
+                        if k==(mod-1):
+                            low+=k*30
+                            up = len(ref_nodoi)
+                        else:
+                            low+=k*30
+                            up+=k*30
+                        new_dois = doi_helper(ref_nodoi[low:up])
+                        dois = dois + new_dois
+                        refs = refs + ref_nodoi
+                        time.sleep(60)
+                        
+                else:
+                    new_dois = doi_helper(ref_nodoi)
+                    dois = dois + new_dois
+                    refs = refs + ref_nodoi
+            print(len(refs),len(dois))
             all_dois = all_dois + dois
             
             if refs:
@@ -204,7 +264,6 @@ def backward(links, num_iter, seed_papers):
                     
                 else:
                     ref = pd.read_csv(direc)
-                    
                     
                     inde = all_indices[len(all_indices)-1]+1
                     for k,val in enumerate(refs):
@@ -240,14 +299,14 @@ def backward(links, num_iter, seed_papers):
                         print(f'\nIndex of doi: {s} = {cell_index}')
                         if s in completed:
                             # mark done already in reference
-                            ref.loc[cell_index,'Iteration'] = i+1
+                            ref.loc[cell_index,'Iteration'] = i
                             iteration = ref.loc[last[0],'Iteration']
                             ref.loc[cell_index,'Status'] = "Done already in " +str(iteration)
                         else:
                             n_dois.append(s)
                             cell_indices.append(cell_index)
                     else:
-                        ref.loc[cell_index,'Iteration'] = i+1
+                        ref.loc[cell_index,'Iteration'] = i
                         ref.loc[cell_index,'Status'] = "DOI not found"
 
                 for k,val in enumerate(dois):
@@ -257,8 +316,8 @@ def backward(links, num_iter, seed_papers):
                     ref.to_csv(f, index=False)
                 
                 bibs = extract_bib_abs(n_dois, direc, cell_indices)
-                #print(len(n_dois),len(dois),len(bibs))
-                extract_abs_also(n_dois, bibs, direc, i+1, cell_indices,'back')
+                print(len(n_dois),len(dois),len(bibs))
+                extract_abs_also(n_dois, bibs, direc, i, cell_indices,'back')
 
 
 
@@ -291,8 +350,9 @@ if __name__ == "__main__":
         else:
             print('\n__Backward and Forward Snowballing__\n')
             papers = seed_iter(links)
-            backward(links, num_iter, papers)
             forward(links, num_iter, papers)
+            backward(links, num_iter, papers)
+            
 
         
     except Exception:

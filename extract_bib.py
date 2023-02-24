@@ -141,11 +141,11 @@ def extract_bib_abs(dois, direc, cell_indices):
                     if ("pdf" in nurl):
                         b = extract_only_bib(doi,ref,i)
                         
-                    elif ("ieee" in nurl):
-                        b = runieee(doi,page)
+                    #elif ("ieee" in nurl):
+                     #   b = runieee(doi,page)
                             
-                    elif ("springer" in nurl):
-                        b = runspringer(doi,page)
+                    #elif ("springer" in nurl):
+                     #   b = runspringer(doi,page)
                             
                     #elif ("elsevier" in nurl):
                      #   b = runsciencedirect(doi,page)
@@ -166,20 +166,14 @@ def extract_bib_abs(dois, direc, cell_indices):
                         bibs.append(b)
                         ref.loc[i,'Status'] = "Extraction successful" 
                         
-                    time.sleep(1)
+                    time.sleep(7)
                     #print(bibs[i]+"\n")
 
-                except Exception as e:
-                    if e.code == 403:
-                        #b = runacm(doi,page)
-                        #if b == "No bib":
-                        bibs.append(extract_only_bib(doi,ref,i))
-                            
-                    else:
-                        print("HTTPError")
-                        bibs.append(extract_only_bib(doi,ref,i))
-                        #traceback.print_exc()
-                        
+                except:
+                    bibs.append(extract_only_bib(doi,ref,i))
+                    #traceback.print_exc()
+
+                finally:
                     continue
             else:
                 bibs.append("No doi")
@@ -210,16 +204,15 @@ def extract_only_bib(doi,ref,i):
         try:
             with urllib.request.urlopen(req) as f:
                 bibtex = f.read().decode()
+                print('bibtex found: ',doi)
                 return bibtex
             
-        except HTTPError as e:
-            if e.code == 404:
-                ref.loc[i,'Status'] = "BIB not found" 
-                return "No bib"
-            else:
-                print('Service unavailable. 504 error')
-                ref.loc[i,'Status'] = "BIB not found" 
-                return "No bib"
+        except:
+            ref.loc[i,'Status'] = "BIB not found" 
+            return "No bib"
+        
+        finally:
+            time.sleep(3)
             
 # Credits end
 ##---Part 2 END---##
@@ -273,7 +266,7 @@ def extract_abs_also(dois, bibs, direc, n_iter, cell_indices,snowtype):
                 db.entries += bib.entries  # update db
                 
             ref.loc[i,'Iteration'] = n_iter
-            time.sleep(1)
+            time.sleep(3)
             
         with open(direc,'w', encoding = "utf-8",newline='') as f:
             ref.to_csv(f, index=False)
