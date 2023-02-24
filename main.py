@@ -221,28 +221,32 @@ def backward(links, num_iter, seed_papers):
             if ref_nodoi:
                 print("Getting dois for nodois in semantic scholar")
                 print(len(ref_nodoi))
-                low=0; up=30
-                if len(ref_nodoi)>30:
-                    mod = len(ref_nodoi)//30
-                    if (len(ref_nodoi)/30)>float(mod):
+                low=0; up=40
+                if len(ref_nodoi)>40:
+                    mod = len(ref_nodoi)//40
+                    if (len(ref_nodoi)/40)>float(mod):
                         mod=mod+1
                     print(mod)
+                    #print("Getting from crossref: ",len(refs))
                     for k in range(mod):
                         if k==(mod-1):
-                            low+=k*30
+                            low+=40
                             up = len(ref_nodoi)
-                        else:
-                            low+=k*30
-                            up+=k*30
+                        elif k!=0:
+                            low+=40
+                            up+=40
+                        print(low,up)
+                        #print(refs[low:up])
                         new_dois = doi_helper(ref_nodoi[low:up])
                         dois = dois + new_dois
                         refs = refs + ref_nodoi
-                        time.sleep(60)
+                        time.sleep(100)
                         
                 else:
                     new_dois = doi_helper(ref_nodoi)
                     dois = dois + new_dois
                     refs = refs + ref_nodoi
+                    
             print(len(refs),len(dois))
             all_dois = all_dois + dois
             
