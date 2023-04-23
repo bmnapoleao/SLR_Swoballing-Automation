@@ -16,11 +16,11 @@ Note: User must have an institutional account on Researchgate and fill the const
 
 ### B. To train the Machine Learning model:
 1. Take the allbibs-(type).bib files and turn them into Training and Testing sets by partitioning them into Training_Excluded.bib, Training_Included.bib, Testing_Excluded.bib, Testing_Included.bib. Training set should include the bibs extracted from the seed set while Testing set should include the potentially relevant papers identified.
-2. Place the newly created bibs into the ./MLclassifier_prelim directory and run 
+2. Place the newly created bibs into their root directory and run 
   ```
   $ python create_dataset.py
   ```
-3. Open the Snowballing_classification_ML.ipynb notebook in Google Colab or as Jupyter Notebook (for Colab, upload the Training.csv and Testing.csv files created in step 2).
+3. Open the SLR_update_ML.ipynb notebook in Google Colab or as Jupyter Notebook (for Colab, upload the Training.csv and Testing.csv files created in step 2).
 4. Train and evaluate the classifier on the dataset. You can finetune the hyperparameters as needed.
 
 

@@ -1,9 +1,11 @@
 The output files from Forward Round 1 results are : 
 i. allbibs-forw.bib - Contain the bibtex of the papers with dois, which are incoming citations to the seed set
+
 ii. References-forw.csv - Contain the status of the results for each paper.
 
 The other txt files are: 
 i. SeedSet.txt : It contains the references of the seed papers used in this snowballing experiment
+
 ii. SeedSetLinks.txt: Contains the corresponding dois of the seed papers that need to be placed in 
     the links.txt file of the root dir. 
 
