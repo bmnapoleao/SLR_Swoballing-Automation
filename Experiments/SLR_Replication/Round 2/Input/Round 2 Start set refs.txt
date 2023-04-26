@@ -1,0 +1,13 @@
+Jain, S., Ali Babar, M., Fernandez, J., 2013. Conducting empirical studies in industry: Balancing rigor and relevance, in: Proceedings International Workshop on Conducting Empirical Studies in Industry, pp. 9–14.
+Sherman, S., Hadar, I., 2013. Conducting a long-term case study in a software firm: An experience report, in: Proceedings International Workshop on Conducting Empirical Studies in Industry, pp. 47–50.
+Wohlin, C., Aurum, A., Angelis, L., Phillips, L., Dittrich, Y., Gorschek, T., Grahn, H., Henningsson, K., Kagstrom, S., Low, G., Rovegard, P., Tomaszewski, P., van Toorn, C., Winter, J., 2012. The success factors powering industry-academia collaboration. IEEE Software 29, 67–73.
+Gorschek, T., Garre, P., Larsson, S., Wohlin, C., 2006. A model for technology transfer in practice. IEEE Software 23, 88–95.
+Pfleeger, S., 1999. Understanding and improving technology transfer in software engineering. Journal of Systems and Software 47, 111–124.
+Runeson, P., 2012. It takes two to tango – an experience report on industry – academia collaboration, in: Proceedings International Conference on Software Testing, Verification and Validation, pp. 872–877.
+Eldh, S., 2013. Some researcher considerations when conducting empirical studies in industry, in: Proceedings International Workshop on Conducting Empirical Studies in Industry, pp. 69–70.
+Gr¨unbacher, P., Rabiser, R., 2013. Success factors for empirical studies in industry-academia collaboration: A reflection, in: Proceedings International Workshop on Conducting Empirical Studies in Industry, pp. 
+Basili, V.R., McGarry, F.E., Pajerski, R., Zelkowitz, M.V., 2002. Lessons learned from 25 years of process improvement: the rise and fall of the nasa software engineering laboratory, in: Proceedings International Conference on Software Engineering, pp. 69–79.
+Rombach, D., Achatz, R., 2007. Research collaborations between academia and industry, in: Proceeindgs Future of Software Engineering, pp. 29–36.
+Mathiassen, L., 2002. Collaborative practice research. Information Technology & People 15, 321–345.
+Wohlin, C., Regnell, B., 1999. Achieving industrial relevance in software engineering education, in: Proceedings Conference on Software Engineering Education and Training, pp. 16–25.
+Misirli, A.T., Erdogmus, H., Juristo, N., Dieste, O., 2014. Topic selection in industry experiments, in: Proceedings International Workshop on Conducting Empirical Studies in Industry, pp. 25–30.

@@ -251,13 +251,17 @@ def extract_abs_also(dois, bibs, direc, n_iter, cell_indices,snowtype):
 
                 bib = bibtexparser.loads(bibs[j])
                 #print(bib.entries)
-                if abstract and len(abstract)>3:
-                    bib.entries[0]['abstract'] = abstract # update in bib
-                    ref.loc[i,'Status'] = "Extraction successful"
-                    
-                else:
-                    bib.entries[0]['abstract'] = "" # update in bib
-                    ref.loc[i,'Status'] = "Abstract not found"
+                try:
+                    if abstract and len(abstract)>3:
+                        bib.entries[0]['abstract'] = abstract # update in bib
+                        ref.loc[i,'Status'] = "Extraction successful"
+                        
+                    else:
+                        bib.entries[0]['abstract'] = "" # update in bib
+                        ref.loc[i,'Status'] = "Abstract not found"
+                except:
+                    print("Cannot parse bibtex")
+                    ref.loc[i,'Status'] = "Cannot parse bibtex"
                 db.entries += bib.entries  # update db
 
             elif stat == "Extraction successful":

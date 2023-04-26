@@ -1,3 +1,11 @@
+The input bib files:
+
+1. Training_Excluded.bib - Excluded studies from the training set
+2. Training_Included.bib - Included studies from the training set
+3. Testing_Included.bib - Included studies from the testing set
+
+After running the create_dataset.py, the CSV files generated are: 
+
 1. Training.csv : contains the training set and relevant papers marked as 1 and irrelevant ones as 0
 
 2. Testing-test.csv: contains the Forward round 1 results using 41 papers in the seed set. It is the 

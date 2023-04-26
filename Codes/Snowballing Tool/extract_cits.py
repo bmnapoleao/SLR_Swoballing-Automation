@@ -108,6 +108,7 @@ def search_cites(paper):
     # search for doi if not there
     
     if refs:
+        print("Getting dois for nodois in semantic scholar")
         print(len(refs))
         low=0; up=40
         if len(refs)>40:

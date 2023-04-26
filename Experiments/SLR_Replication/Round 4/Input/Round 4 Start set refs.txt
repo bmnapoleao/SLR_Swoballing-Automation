@@ -1,0 +1,5 @@
+Koziolek, H., Goldschmidt, T., 2014. Tool-driven technology transfer to support software architecture decisions, in: Proceedings Software Engineering, pp. 159–164.
+Larsson, M., Wall, A., Norstr¨om, C., Crnkovic, I., 2006. Technology transfer: Why some succeed and some don’t, in: Proceedings International Workshop on Software Technology Transfer in Software Engineering, pp. 23—-28.
+Rombach, D., 2000. Fraunhofer: the German model for applied research and technology transfer, in: Proceedings International Conference on Software Engineering, pp. 531–537.
+Arisholm, E., Anda, B., Jørgensen, M., Sjøberg, D., 1999. Guidelines on conducting software process improvement studies in industry, in: Proceedings Information Systems Research in Scandinavia, pp. 87–103.
+Punter, T., van de Laar, P., 2010. Industrial impact and lessons learned, in: Van de Laar, P., Punter, T. (Eds.), Views on Evolvability of Embedded Systems. Springer, Dordrecht, pp. 279–299.

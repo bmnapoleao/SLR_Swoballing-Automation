@@ -34,8 +34,12 @@ https://doi.org/10.1142/9789812795588_0004
 https://doi.org/10.1023/a:1022994516210
 https://doi.org/10.1145/1138046.1138052
 https://doi.org/10.1145/1368088.1368193
+No doi
+No doi
 https://doi.org/10.1145/1138046.1138055
 https://doi.org/10.1145/337180.337443
+No doi
 https://doi.org/10.1007/978-90-481-9849-8_17
+No doi
 https://doi.org/10.1145/2647648.2647649
 https://doi.org/10.1109/cseet.2009.22
