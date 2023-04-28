@@ -20,7 +20,7 @@ The details of the main folders are as follows:
    - SLR Replication - They contain the Input and Output files of the Replication. The actual input are the DOI links from Crossref which must be put inside the links.txt file to perform the experiment. The output files contain the bibtex of the extracted papers and the Csv with the status of extraction.
    - SLR Update Evaluation - They contain the Input and Output files of the SLR Update. Here there are 2 inputs:
         - For Round 1 Forward Snowballing: The actual input are the DOI links from Crossref which must be put inside the links.txt file to perform the experiment. The output files contain the bibtex of the extracted papers and the Csv with the status of extraction.
-        - For the SLR selection process: The training bib files were from the paper /ref , and the testing bib files were from the result of round 1 forward snowballing. The output is given as performance metrics of the evaluation of relevant studies identified by the model from the testing set.
+        - For the SLR selection process: The training bib files were from the paper /ref , and the testing bib files were from the result of round 1 forward snowballing. The output is the relevant studies identified by the model from the testing set.
 
 
 ### B. How to run the code:
