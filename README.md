@@ -1,6 +1,6 @@
 # Snowballing_Automation
 
-- The project automates **Snowballing** - a method of conducting Systematic Literature Reviews. It implements the two types of Snowballing: **Backward Snowballing**, which uses the outgoing references from a paper to identify new potential papers; and **Forward Snowballing**, which identifies new papers using incoming references or citations to a paper. Here, the paper containing the Author names, Title, Publisher name, Year are extracted along with the bibtex of the papers containing the Abstracts. 
+- The project automates the activity of searching and selecting studies for SLR updates in Software Engineering. It implements the two types of Snowballing: **Backward Snowballing**, which uses the outgoing references from a paper to identify new potential papers; and **Forward Snowballing**, which identifies new papers using incoming references or citations to a paper. Also, it allows the selection of studies for SLR Updates using Machine Learning models. Here, the paper containing the Author names, Title, Publisher name, Year are extracted along with the bibtex of the papers containing the Abstracts. 
 
 - **Updating the SLR** is done using Machine Learning models which identify the new papers which are relevant to the study. 
 
