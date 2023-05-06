@@ -11,43 +11,43 @@ The details of the main folders are as follows:
    - Dataset_SLR_Update-Selection -  It is the dataset used for the selection of studies using Machine Learning in SLR Update process.
    
 2. Codes: 
-   - SLR Replication - Search_SLR_Snowballing.py is the code to be run after placing links.txt as mentioned in section B. It implements the Snowballing tool. The extract_X.py files are helper code to Search_SLR_Snowballing.py . 
-   - SLR Update - create_dataset.py and Selection_SLR_update.ipynb perform the SLR Update process.
+   - SLR Replication - _Search_SLR_Snowballing.py_ is the code to be run after placing _links.txt_ as mentioned in section B. It implements the Snowballing tool. The _extract_X.py_ files are helper code to _Search_SLR_Snowballing.py_ . 
+   - SLR Update - _create_dataset.py_ and _Selection_SLR_update.ipynb_ perform the SLR Update process.
 
 3. Evaluation:
    - SLR Replication - They contain the Input and Output files of the Replication. The actual input are the DOI links from Crossref which must be put inside the links.txt file to perform the experiment. The output files contain the bibtex of the extracted papers and the Csv with the status of extraction.
    - SLR Update Evaluation - They contain the Input and Output files of the SLR Update. Here there are 2 inputs:
-        - For Round 1 Forward Snowballing: The actual input are the DOI links from Crossref which must be put inside the links.txt file to perform the experiment. The output files contain the bibtex of the extracted papers and the Csv with the status of extraction.
+        - For Round 1 Forward Snowballing: The actual input are the DOI links from Crossref which must be put inside the _links.txt_ file to perform the experiment. The output files contain the bibtex of the extracted papers and the Csv with the status of extraction.
         - For the SLR selection process: The training bib files were from the paper /ref , and the testing bib files were from the result of round 1 forward snowballing. The output is the relevant studies identified by the model from the testing set.
 
 
 ### B. How to run the code:
 1. Clone this repository.
-2. To run the SLR Replication and put the seed set in the file links.txt (in the form of doi urls of the papers separated by newlines)
-3. Place links.txt in the same directory as ./Codes and run the following:
+2. To run the SLR Replication and put the seed set in the file _links.txt_ (in the form of doi urls of the papers separated by newlines)
+3. Place _links.txt_ in the same directory as _./Codes_ and run the following:
   ```
   $ python Search_SLR_Snowballing.py
   ```
 4. Enter the inputs asked like number of iterations, and type of snowballing.
-5. The files References-(type).csv and allbibs-(type).bib will be created in the ./Codes directory.
-Note: User must have an institutional account on Researchgate and fill the constants in extract_bib.py for username and password.
+5. The files _References-(type).csv_ and _allbibs-(type).bib_ will be created in the _./Codes_ directory.
+Note: User must have an institutional account on Researchgate and fill the constants in _extract_bib.py_ for username and password.
 6. To perform the SLR Update, first create the testing set by running 1 round of forward snowballing by following steps 2 to 4. Use the bib file for the testing. 
-7. Put the training and testing bibs in the same directory as ./Codes and after modifying the create_dataset.py according to the file name of the bibs, run:
+7. Put the training and testing bibs in the same directory as _./Codes_ and after modifying the _create_dataset.py_ according to the file name of the bibs, run:
   ```
   $ python create_dataset.py
   ```
 8. The CSV files will be generated. Use them for step 9.
-9. The selection process is done using Machine Learning. Open the Selection_SLR_update.ipynb notebook in Google Colab or as Jupyter Notebook (for Colab, upload the Training.csv and Testing.csv files created in step 8).
+9. The selection process is done using Machine Learning. Open the _Selection_SLR_update.ipynb_ notebook in Google Colab or as Jupyter Notebook (for Colab, upload the _Training.csv_ and _Testing.csv_ files created in step 8).
 10. Train and evaluate the classifiers on the dataset. You can finetune the hyperparameters as needed.
 11. The output is the relevant studies to update the SLR.
 
 
 ### C. Requirements
-The libraries and modules required to be imported before running section B are given in requirements.txt
-To start, open up a terminal or a command prompt and navigate to the ./Codes directory of the project. Once you are there, type the following command:
+The libraries and modules required to be imported before running section B are given in _requirements.txt_ .
+To start, open up a terminal or a command prompt and navigate to the _./Codes_ directory of the project. Once you are there, type the following command:
   ```
   $ pip install -r requirements.txt
   ``` 
   
  
-NOTE: Every directory of the 3 main folders contains a helpdoc with further details about the files.
+NOTE: Every directory of the 3 main folders contains a _helpdoc.txt_ with further details about the files.
