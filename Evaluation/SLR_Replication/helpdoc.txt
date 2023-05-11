@@ -1,0 +1,32 @@
+Backward and Forward Snowballing (Rounds 1 to 5) + Seed iteration:
+_______________________________________________________________
+
+The input file:
+---------------
+1. links.txt: User created and defined file. Should contain the corresponding dois of the seed papers that
+   need to be placed in the "links.txt" file of the root dir. The dois used for our experiment are in the 
+   file "Links from Crossref.txt" and the actual references (string) of these dois are in the 
+   "Round 1 Start set refs.txt" file.
+
+
+The output files: 
+-----------------
+Forward Snowballing
+===================
+1. allbibs-back.bib - Contain the bibtex of the papers with dois, which are outgoing references to the seed set.
+
+2. References-back.csv - Contain the status of the backward snowballing results for each paper.
+
+Forward Snowballing
+===================
+1. allbibs-forw.bib - Contain the bibtex of the papers with dois, which are incoming citations to the seed set.
+
+2. References-forw.csv - Contain the status of the forward snowballing results for each paper.
+
+Round 0 - Seed Set
+==================
+1. allbibs-seed.bib - Contain the bibtex of the seed set papers with dois.
+
+2. References-seed.csv - Contain the status of the bibtex extraction results for the seed set papers.
+
+

@@ -50,4 +50,4 @@ To start, open up a terminal or a command prompt and navigate to the _./Codes_ d
   ``` 
   
  
-NOTE: Every directory of the 3 main folders contains a _helpdoc.txt_ with further details about the files.
+NOTE: A _helpdoc.txt_ with further details about the files is present in the particular directory, wherever necessary.

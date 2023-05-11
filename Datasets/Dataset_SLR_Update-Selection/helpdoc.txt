@@ -1,8 +1,11 @@
+Dataset_SLR_Update-Selection:
+----------------------------
 The input bib files:
 
 1. Training_Excluded.bib - Excluded studies from the training set
 2. Training_Included.bib - Included studies from the training set
 3. Testing_Included.bib - Included studies from the testing set
+
 
 After running the create_dataset.py, the CSV files generated are: 
 
@@ -17,3 +20,5 @@ After running the create_dataset.py, the CSV files generated are:
    experiment.)
 
 3. Testing.csv: contains only the relevant papers against which the results will be validated
+
+The above 3 .csv files are used for training and testing the models in the Search_SLR_Update.ipynb notebook.
