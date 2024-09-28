@@ -11,7 +11,7 @@ The input file:
 
 The output files: 
 -----------------
-Forward Snowballing
+Backward Snowballing
 ===================
 1. allbibs-back.bib - Contain the bibtex of the papers with dois, which are outgoing references to the seed set.
 
